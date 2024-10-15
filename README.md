@@ -3,7 +3,7 @@
 
 ## Team Members
 
-- Student 1
-- Student 2
-- Student 3
-- Student 4
+- Prince Lucky F. Santos
+- William Jiang
+- Shaheel Singh
+- Zinc Young
