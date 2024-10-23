@@ -4,27 +4,23 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "path";
 import morgan from "morgan";
-
-// middleware
 import { timeMiddleware } from "./middleware/time";
-
-// routes
 import rootRoutes from "./routes/root";
 
-dotenv.config(); // make sure that this is above all your code
-
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(morgan("dev"));
 
-// express supports json and and url encoded bodies
+app.set("views", path.join(process.cwd(), "src", "server", "views"));
+app.set("view engine", "ejs");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use(timeMiddleware);
 app.use(express.static(path.join(process.cwd(), "src", "public"))); // root directory all the way to the public folder
 app.use(cookieParser());
-app.set("views", path.join(process.cwd(), "src", "server", "views"));
-app.set("view engine", "ejs");
 app.use("/", rootRoutes);
 
 // express goes in sequential order of middleware that is used
