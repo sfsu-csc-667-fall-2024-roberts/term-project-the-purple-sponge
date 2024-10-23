@@ -1,3 +1,6 @@
+# Husky
+.husky/pre-commit
+
 # Logs
 logs
 *.log
