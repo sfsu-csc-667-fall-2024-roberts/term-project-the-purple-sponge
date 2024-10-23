@@ -10,11 +10,4 @@ router.post("/", (request, response) => {
   response.send("Hello world");
 });
 
-// important anything from './filename'
 export default router;
-
-// must destructure: import { router } from './filename'
-// export { router };
-
-// This is a different convention
-// module.exports = router;
