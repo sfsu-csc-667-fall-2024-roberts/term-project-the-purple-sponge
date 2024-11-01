@@ -6,9 +6,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon --exec ts-node src/server/index.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:create": "node-pg-migrate create -j ts --",
+    "db:migrate": "ts-node node_modules/.bin/node-pg-migrate -j ts up",
+    "db:rollback": "node-pg-migrate down"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.7.7",
+    "@types/pg-promise": "^0.0.28",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "nodemon": "^3.1.7",
@@ -32,6 +35,10 @@
     "ejs": "^3.1.10",
     "express": "^5.0.1",
     "http-errors": "^2.0.0",
-    "morgan": "^1.10.0"
+    "install": "^0.13.0",
+    "morgan": "^1.10.0",
+    "node-pg-migrate": "^7.7.1",
+    "pg": "^8.13.1",
+    "pg-promise": "^11.10.1"
   }
 }
