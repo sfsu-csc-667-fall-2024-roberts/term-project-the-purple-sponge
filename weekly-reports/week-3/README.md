@@ -12,4 +12,5 @@
   - Webpack, web-pack-cli, and ts-loader to allow us to bundle all of our files together and avoid the hassle of creating many script and link tags.
   - livereload and connect-livereload to set up hot reloading for the front end code.
   - concurrently to run multiple commands in parallel.
+- Set up a working connection to a locally hosted database
 - Created all the routes that we will be using for our bingo game.
