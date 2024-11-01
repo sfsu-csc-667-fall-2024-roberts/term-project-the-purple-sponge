@@ -1,4 +1,4 @@
-# The Purple Sponge’s Milestone 2 (CSC 667)
+# The Purple Sponge’s Milestone 3 (CSC 667)
 
 # Team Letter: G
 
