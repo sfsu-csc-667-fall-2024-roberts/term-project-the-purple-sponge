@@ -1,27 +1,54 @@
-import express from "express";
-import httpErrors from "http-errors";
-import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
-import path from "path";
-import morgan from "morgan";
-import { timeMiddleware } from "./middleware/time";
-import rootRoutes from "./routes/root";
+import express from 'express';
+import httpErrors from 'http-errors';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+import path from 'path';
+import morgan from 'morgan';
+import { timeMiddleware } from './middleware/time';
+import connectLiveReload from 'connect-livereload';
+import livereload from 'livereload';
 
-dotenv.config();
+// routes
+import rootRoutes from './routes/root';
+import gameRoutes from './routes/game';
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(morgan("dev"));
+dotenv.config();
+app.use(morgan('dev'));
 
-app.set("views", path.join(process.cwd(), "src", "server", "views"));
-app.set("view engine", "ejs");
+app.set('views', path.join(process.cwd(), 'src', 'server', 'views'));
+app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(timeMiddleware);
-app.use(express.static(path.join(process.cwd(), "src", "public"))); // root directory all the way to the public folder
+const staticPath = path.join(process.cwd(), 'src', 'public');
+app.use(express.static(staticPath)); // referencing static files starts from public folder
+
+if (process.env.NODE_ENV === 'development') {
+  const reloadServer = livereload.createServer();
+  reloadServer.watch(staticPath);
+  reloadServer.server.once('connection', () => {
+    setTimeout(() => {
+      reloadServer.refresh('/');
+    }, 100);
+  });
+  app.use(connectLiveReload());
+}
+
+// Routes
+// unauthenticated landing page
+// authenticated landing page (where a game list and global chat will go)
+// login
+// register
+// game lobby
+// game page
+
 app.use(cookieParser());
-app.use("/", rootRoutes);
+app.use('/', rootRoutes);
+app.use('/game', gameRoutes);
 
 // express goes in sequential order of middleware that is used
 // this will be the last thing it tries to match if it is at the bottom
