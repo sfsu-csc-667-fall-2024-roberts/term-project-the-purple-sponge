@@ -1,10 +1,19 @@
 <html>
   <head>
-    <title>Hello from ejs</title>
+    <title>Hello from root ejs</title>
     <link rel="stylesheet" href="/css/root.css" />
   </head>
   <body>
-    <h1>Hello there my favorite color is <%= info %></h1>
+    <h1>Root <%= info %></h1>
+    <ul>
+      <li><a href="http://localhost:3000/login">login</a></li>
+      <li><a href="http://localhost:3000/signup">sign up</a></li>
+      <li><a href="http://localhost:3000/landingpageunauth">landing page unauth</a></li>
+      <li><a href="http://localhost:3000/landingpageauth">landing page auth</a></li>
+      <li><a href="http://localhost:3000/game/waitinglobby">waiting lobby</a></li>
+      <li><a href="http://localhost:3000/game/gamecreation">game creation</a></li>
+      <li><a href="http://localhost:3000/game/gamescreen">game screen</a></li>
+    </ul>
 
     <!-- Keep script tag at bottom of the body -->
     <script src="./js/main.js"></script>

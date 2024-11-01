@@ -5,9 +5,12 @@ import dotenv from 'dotenv';
 import path from 'path';
 import morgan from 'morgan';
 import { timeMiddleware } from './middleware/time';
-import rootRoutes from './routes/root';
 import connectLiveReload from 'connect-livereload';
 import livereload from 'livereload';
+
+// routes
+import rootRoutes from './routes/root';
+import gameRoutes from './routes/game';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,8 +38,17 @@ if (process.env.NODE_ENV === 'development') {
   app.use(connectLiveReload());
 }
 
+// Routes
+// unauthenticated landing page
+// authenticated landing page (where a game list and global chat will go)
+// login
+// register
+// game lobby
+// game page
+
 app.use(cookieParser());
 app.use('/', rootRoutes);
+app.use('/game', gameRoutes);
 
 // express goes in sequential order of middleware that is used
 // this will be the last thing it tries to match if it is at the bottom
