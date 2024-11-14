@@ -5,16 +5,18 @@ import dotenv from 'dotenv';
 import path from 'path';
 import morgan from 'morgan';
 import { timeMiddleware } from './middleware/time';
-import connectLiveReload from 'connect-livereload';
-import livereload from 'livereload';
+
+dotenv.config();
 
 // routes
 import rootRoutes from './routes/root';
 import gameRoutes from './routes/game';
 
+import liveReloadConfig from './config/livereload';
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-dotenv.config();
+
 app.use(morgan('dev'));
 
 app.set('views', path.join(process.cwd(), 'src', 'server', 'views'));
@@ -26,17 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(timeMiddleware);
 const staticPath = path.join(process.cwd(), 'src', 'public');
 app.use(express.static(staticPath)); // referencing static files starts from public folder
-
-if (process.env.NODE_ENV === 'development') {
-  const reloadServer = livereload.createServer();
-  reloadServer.watch(staticPath);
-  reloadServer.server.once('connection', () => {
-    setTimeout(() => {
-      reloadServer.refresh('/');
-    }, 100);
-  });
-  app.use(connectLiveReload());
-}
+liveReloadConfig(app, staticPath);
 
 // Routes
 // unauthenticated landing page
