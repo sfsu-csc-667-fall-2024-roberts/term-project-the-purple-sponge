@@ -1,13 +1,13 @@
-import express from 'express'; // need to do it the ES6 way to avoid false errors with typescript
+import express from 'express';
 import db from '../db/connection';
 import { request } from 'http';
 
 const router = express.Router();
 
-type TestRecord = {
-  id: number;
-  test_string: string;
-};
+// type TestRecord = {
+//   id: number;
+//   test_string: string;
+// };
 
 router.get('/', (request, response) => {
   response.render('root', { info: 'blue' });
@@ -31,8 +31,8 @@ router.get('/signup', (request, response) => {
 });
 
 router.get('/test-insert', async (request, response) => {
-  await db.any(`INSERT INTO test_table ("test_string") VALUES ($1)`, [`Hello on ${new Date().toLocaleString()}`]);
-  const results = await db.any<TestRecord>(`select * from test_table;`);
+  await db.any(`INSERT INTO test ("test_string") VALUES ($1)`, [`Hello on ${new Date().toLocaleString()}`]);
+  const results = await db.any(`select * from test;`);
   response.json(results);
 });
 
