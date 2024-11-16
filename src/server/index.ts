@@ -1,54 +1,40 @@
-import express from 'express';
-import httpErrors from 'http-errors';
-import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
-import path from 'path';
-import morgan from 'morgan';
-import { timeMiddleware } from './middleware/time';
-import connectLiveReload from 'connect-livereload';
-import livereload from 'livereload';
+import express, { application } from "express";
+import httpErrors from "http-errors";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+import path from "path";
+import morgan from "morgan";
+dotenv.config();
 
-// routes
-import rootRoutes from './routes/root';
-import gameRoutes from './routes/game';
+// import from manifest files
+import * as routes from "./routes/routesmanifest";
+import * as configurations from "./config/configmanifest";
+import * as middleware from "./middleware/middlewaremanifest";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-dotenv.config();
-app.use(morgan('dev'));
 
-app.set('views', path.join(process.cwd(), 'src', 'server', 'views'));
-app.set('view engine', 'ejs');
+app.use(morgan("dev"));
+
+app.set("views", path.join(process.cwd(), "src", "server", "views"));
+app.set("view engine", "ejs");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(timeMiddleware);
-const staticPath = path.join(process.cwd(), 'src', 'public');
+app.use(middleware.timeMiddleware);
+const staticPath = path.join(process.cwd(), "src", "public");
+console.log("Static path is: ", staticPath);
 app.use(express.static(staticPath)); // referencing static files starts from public folder
+app.use(cookieParser("secret")); // must be before express-sessions
+configurations.configureLiveReload(app, staticPath);
+configurations.configureSession(app);
 
-if (process.env.NODE_ENV === 'development') {
-  const reloadServer = livereload.createServer();
-  reloadServer.watch(staticPath);
-  reloadServer.server.once('connection', () => {
-    setTimeout(() => {
-      reloadServer.refresh('/');
-    }, 100);
-  });
-  app.use(connectLiveReload());
-}
-
-// Routes
-// unauthenticated landing page
-// authenticated landing page (where a game list and global chat will go)
-// login
-// register
-// game lobby
-// game page
-
-app.use(cookieParser());
-app.use('/', rootRoutes);
-app.use('/game', gameRoutes);
+// group up the routes
+app.use("/", routes.root);
+app.use("/games", middleware.authenticationMiddleware, routes.games);
+app.use("/auth", routes.auth);
+app.use("/test", routes.test);
 
 // express goes in sequential order of middleware that is used
 // this will be the last thing it tries to match if it is at the bottom
