@@ -4,13 +4,12 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "path";
 import morgan from "morgan";
-import { timeMiddleware } from "./middleware/time";
 dotenv.config();
 
-// import all routes from manifest file
+// import from manifest files
 import * as routes from "./routes/routesmanifest";
-
-import * as configurations from "./config/livereloadmanifest";
+import * as configurations from "./config/configmanifest";
+import * as middleware from "./middleware/middlewaremanifest";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,17 +22,18 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(timeMiddleware);
+app.use(middleware.timeMiddleware);
 const staticPath = path.join(process.cwd(), "src", "public");
 console.log("Static path is: ", staticPath);
 app.use(express.static(staticPath)); // referencing static files starts from public folder
+app.use(cookieParser("secret")); // must be before express-sessions
 configurations.configureLiveReload(app, staticPath);
-
-app.use(cookieParser());
+configurations.configureSession(app);
 
 // group up the routes
 app.use("/", routes.root);
-app.use("/games", routes.games);
+app.use("/landingpageauth", middleware.authenticationMiddleware);
+app.use("/games", middleware.authenticationMiddleware, routes.games);
 app.use("/auth", routes.auth);
 app.use("/test", routes.test);
 
