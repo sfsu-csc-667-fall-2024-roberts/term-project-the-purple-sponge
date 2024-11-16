@@ -5,17 +5,12 @@ import dotenv from "dotenv";
 import path from "path";
 import morgan from "morgan";
 import { timeMiddleware } from "./middleware/time";
-
 dotenv.config();
 
-// routes
-import rootRoutes from "./routes/root";
-import gameRoutes from "./routes/games";
-import authRoutes from "./routes/auth";
-import testRoutes from "./routes/test";
+// import all routes from manifest file
+import * as routes from "./routes/index";
 
 import liveReloadConfig from "./config/livereload";
-import test from "node:test";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -37,10 +32,10 @@ liveReloadConfig(app, staticPath);
 app.use(cookieParser());
 
 // group up the routes
-app.use("/", rootRoutes);
-app.use("/games", gameRoutes);
-app.use("/auth", authRoutes);
-app.use("/test", testRoutes);
+app.use("/", routes.root);
+app.use("/games", routes.games);
+app.use("/auth", routes.auth);
+app.use("/test", routes.test);
 
 // express goes in sequential order of middleware that is used
 // this will be the last thing it tries to match if it is at the bottom
