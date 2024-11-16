@@ -8,9 +8,9 @@ import { timeMiddleware } from "./middleware/time";
 dotenv.config();
 
 // import all routes from manifest file
-import * as routes from "./routes/index";
+import * as routes from "./routes/routesmanifest";
 
-import liveReloadConfig from "./config/livereload";
+import * as configurations from "./config/livereloadmanifest";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,7 +27,7 @@ app.use(timeMiddleware);
 const staticPath = path.join(process.cwd(), "src", "public");
 console.log("Static path is: ", staticPath);
 app.use(express.static(staticPath)); // referencing static files starts from public folder
-liveReloadConfig(app, staticPath);
+configurations.configureLiveReload(app, staticPath);
 
 app.use(cookieParser());
 
