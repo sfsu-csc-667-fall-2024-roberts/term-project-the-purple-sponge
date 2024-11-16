@@ -32,7 +32,6 @@ configurations.configureSession(app);
 
 // group up the routes
 app.use("/", routes.root);
-app.use("/landingpageauth", middleware.authenticationMiddleware);
 app.use("/games", middleware.authenticationMiddleware, routes.games);
 app.use("/auth", routes.auth);
 app.use("/test", routes.test);
