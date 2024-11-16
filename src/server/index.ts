@@ -1,4 +1,4 @@
-import express from "express";
+import express, { application } from "express";
 import httpErrors from "http-errors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -11,8 +11,11 @@ dotenv.config();
 // routes
 import rootRoutes from "./routes/root";
 import gameRoutes from "./routes/games";
+import authRoutes from "./routes/auth";
+import testRoutes from "./routes/test";
 
 import liveReloadConfig from "./config/livereload";
+import test from "node:test";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,6 +39,8 @@ app.use(cookieParser());
 // group up the routes
 app.use("/", rootRoutes);
 app.use("/games", gameRoutes);
+app.use("/auth", authRoutes);
+app.use("/test", testRoutes);
 
 // express goes in sequential order of middleware that is used
 // this will be the last thing it tries to match if it is at the bottom
