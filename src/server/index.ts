@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "path";
 import morgan from "morgan";
+import { createServer } from "http";
 dotenv.config();
 
 // import from manifest files
@@ -12,6 +13,7 @@ import * as configurations from "./config/configmanifest";
 import * as middleware from "./middleware/middlewaremanifest";
 
 const app = express();
+const server = createServer(app);
 const PORT = process.env.PORT || 3000;
 
 app.use(morgan("dev"));
@@ -29,6 +31,11 @@ app.use(express.static(staticPath)); // referencing static files starts from pub
 app.use(cookieParser("secret")); // must be before express-sessions
 configurations.configureLiveReload(app, staticPath);
 configurations.configureSession(app);
+configurations.configureSocketIO(
+  server,
+  app,
+  configurations.configureSession(app)
+);
 
 // group up the routes
 app.use("/", routes.root);
