@@ -12,12 +12,8 @@ router.get("/", (request, response) => {
   // response.render tells application to find our template named "root"
 });
 
-router.get("/landingpageunauth", (request, response) => {
-  response.render("landing_page_unauth");
-});
-
-router.get("/landingpageauth", (request, response) => {
-  response.render("landing_page_auth");
+router.get("/landingpage", (request, response) => {
+  response.render("landing_page");
 });
 
 router.get("/login", (request, response) => {
