@@ -6,6 +6,34 @@
   <body>
     <h1><%= title %></h1>
 
+    <section>
+
+    </section>
+
+    <aside>
+      <div>
+        Here are the options of the lobby for all to see
+      </div>
+
+      <div>
+        Here are the options for the host to change
+        <input type="checkbox" id="thing1" name="thing1" value="thing1">
+        <label for="thing1">Thing1</label><br>
+        <input type="checkbox" id="thing2" name="thing2" value="thing2">
+        <label for="thing2">Thing2</label><br>
+        
+        <label for="plyr-no">Number of Players (between 1 and 5):</label>
+        <input type="number" id="plyr-no" name="plyr-no" min="1" max="5">
+      </div>
+
+      <form>
+        <label for="game-start">Let's play?</label><br>
+        <input type="button" id="ready" name="ready" value="Ready">
+        <input type="button" id="unready" name="unready" value="Unready">
+        <input type="button" id="start-game" name="start-game" value="Start game">
+      </form>
+    </aside>
+
     <!-- Keep script tag at bottom of the body -->
     <script src="/js/main.js"></script>
   </body>
