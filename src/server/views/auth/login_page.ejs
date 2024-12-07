@@ -25,6 +25,12 @@
           <button type="submit">Login</button>
         </div>
       </form>
+      <!-- Display any error messages here from express-flash -->
+      <% if(flashMessages.length > 0) { %>
+        <div id="flash-message-display">
+          <%= flashMessages %>
+        </div>
+        <% } %>
     </section>
   </body>
 </html>

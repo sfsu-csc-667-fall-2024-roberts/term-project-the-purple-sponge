@@ -5,13 +5,17 @@ import { Users } from "../db/dbmanifest";
 const router = express.Router();
 
 router.get("/login", (request, response) => {
-  console.log("login route called");
-  response.render("auth/login_page", { title: "Login Page" });
+  console.log("/login route called");
+  response.render("auth/login_page", {
+    flashMessages: request.flash("error"),
+  });
 });
 
 router.get("/register", (request, response) => {
   console.log("register route called");
-  response.render("auth/signup_page", { title: "Sign Up Page" });
+  response.render("auth/signup_page", {
+    flashMessages: request.flash("error"),
+  });
 });
 
 router.post("/login", async (request, response) => {
@@ -21,11 +25,11 @@ router.post("/login", async (request, response) => {
     // @ts-expect-error TODO: Define the session type for the user object
     request.session.user = user;
     // response.json(user);
-    response.redirect("/landingpageauth");
+    response.redirect("/");
   } catch (error) {
     console.error(error);
 
-    request.flash("error", "Failed to register user");
+    request.flash("error", "Invalid Credentials Entered");
     response.redirect("/auth/login");
   }
 });
@@ -37,10 +41,10 @@ router.post("/register", async (request, response) => {
     // @ts-expect-error TODO: Define the session type for the user object
     request.session.user = user;
     // response.json(user);
-    response.redirect("/landingpageauth");
+    response.redirect("/");
   } catch (error) {
     console.error(error);
-    request.flash("error", error as string);
+    request.flash("error", `ERROR in auth route for registering: ${error}`);
     response.redirect("/auth/register");
   }
 });
