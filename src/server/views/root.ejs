@@ -6,6 +6,7 @@
   <body>
     <h1>Landing Page</h1>
     <h1><%= info %></h1>
+    <%- include('partials/header') %>
 
     <nav>
       <li><a href="http://localhost:3000/auth/login">Login</a></li>
@@ -39,5 +40,6 @@
 
     <!-- Keep script tag at bottom of the body -->
     <script src="/js/main.js"></script>
+    <%- include('partials/footer') %>
   </body>
 </html>
