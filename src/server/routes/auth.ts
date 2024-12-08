@@ -44,7 +44,7 @@ router.post("/register", async (request, response) => {
     response.redirect("/");
   } catch (error) {
     console.error(error);
-    request.flash("error", `ERROR in auth route for registering: ${error}`);
+    request.flash("error", `${error}`);
     response.redirect("/auth/register");
   }
 });
