@@ -130,3 +130,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 src/public/js/main.js
+.vscode/launch.json
