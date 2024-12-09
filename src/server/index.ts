@@ -50,6 +50,6 @@ app.use((request, response, next) => {
   next(httpErrors(404));
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
