@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from "express";
+
+// if session not found redirect to login page, do not allow other function to continue
 const authenticationMiddleware = (
   request: Request,
   response: Response,

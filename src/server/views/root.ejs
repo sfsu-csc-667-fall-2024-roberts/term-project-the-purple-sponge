@@ -1,21 +1,45 @@
 <html>
   <head>
-    <title>Hello from root ejs</title>
+    <title>Landing Page</title>
     <link rel="stylesheet" href="/css/root.css" />
   </head>
   <body>
-    <h1>Root <%= info %></h1>
-    <ul>
-      
-      <li><a href="http://localhost:3000/auth/login">login</a></li>
-      <li><a href="http://localhost:3000/auth/register">sign up</a></li>
-      <li><a href="http://localhost:3000/landingpageunauth">landing page unauth</a></li>
-      <li><a href="http://localhost:3000/landingpageauth">landing page auth</a></li>
-      <li><a href="http://localhost:3000/games/412/waitinglobby">waiting lobby 412</a></li>
-      <li><a href="http://localhost:3000/games/412">game screen 412</a></li>
-    </ul>
+    <h1>Landing Page</h1>
+    <h1><%= info %></h1>
+    <%- include('partials/header') %>
+
+    <nav>
+      <li><a href="http://localhost:3000/auth/login">Login</a></li>
+      <li><a href="http://localhost:3000/auth/register">Sign Up</a></li>
+      <li><a href="http://localhost:3000/games/412/waitinglobby">Waiting Lobby 412</a></li>
+      <li><a href="http://localhost:3000/games/412">Game Screen 412</a></li>
+    </nav>
+
+
+    <article>
+      Welcome to Bingo!
+    </article>
+
+    <section>
+      List of game:
+      bing
+      bong
+      poo
+    </section>
+
+    <aside>
+      <div>
+        Hello chat (Now you can use this)
+      </div>
+      <form>
+        <label for="all-chat"> Speak here: </label><br>
+        <input type="text" id="all-chat" name="all-chat" placeholder="Write your message here">
+        <input type="submit" id="send-msg" name="all-chat-send" value="Submit">
+      </form>
+    </aside>
 
     <!-- Keep script tag at bottom of the body -->
     <script src="/js/main.js"></script>
+    <%- include('partials/footer') %>
   </body>
 </html>

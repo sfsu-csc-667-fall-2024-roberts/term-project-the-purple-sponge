@@ -4,11 +4,12 @@ import flash from "express-flash";
 import session from "express-session";
 
 let sessionMiddleware: RequestHandler | undefined = undefined;
-export default (app: Express): RequestHandler | undefined => {
+export default (app: Express): RequestHandler => {
   // create a session middleware undefined
   // create a session table in the database using connect-pg-simple
   // add a session secret property to the .env that is not created yet
   if (sessionMiddleware === undefined) {
+    console.log("Session secret: ", process.env.SESSION_SECRET);
     sessionMiddleware = session({
       store: new (connectPgSimple(session))({
         createTableIfMissing: true,
