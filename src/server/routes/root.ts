@@ -8,7 +8,7 @@ const router = express.Router();
 // };
 
 router.get("/", (request, response) => {
-  response.render("root", { info: "blue" });
+  response.render("root", { title: "Welcome to the home page!" });
   // response.render tells application to find our template named "root"
 });
 

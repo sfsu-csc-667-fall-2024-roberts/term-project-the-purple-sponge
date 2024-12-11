@@ -1,0 +1,19 @@
+/* center the body */
+html {
+  display: table;
+  margin: auto;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+}

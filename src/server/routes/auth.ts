@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/login", (request, response) => {
   console.log("/login route called");
   response.render("auth/login_page", {
+    title: "Login Page",
     flashMessages: request.flash("error"),
   });
 });
@@ -14,6 +15,7 @@ router.get("/login", (request, response) => {
 router.get("/register", (request, response) => {
   console.log("register route called");
   response.render("auth/signup_page", {
+    title: "Register Page",
     flashMessages: request.flash("error"),
   });
 });
