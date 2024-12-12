@@ -25,10 +25,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(middleware.timeMiddleware);
+
+// bootstrap css and js
+app.use(
+  "/css",
+  express.static(path.join(process.cwd(), "node_modules/bootstrap/dist/css"))
+);
+app.use(
+  "/js",
+  express.static(path.join(process.cwd(), "node_modules/bootstrap/dist/js"))
+);
+
 const staticPath = path.join(process.cwd(), "src", "public");
 console.log("Static path is: ", staticPath);
 app.use(express.static(staticPath)); // referencing static files starts from public folder
 app.use(cookieParser("secret")); // must be before express-sessions
+
 configurations.configureLiveReload(app, staticPath);
 configurations.configureSession(app);
 configurations.configureSocketIO(
