@@ -9,6 +9,9 @@ const router = express.Router();
 
 router.get("/", (request, response) => {
   response.render("root", { info: "blue" });
+  if (request.session.user) {
+    console.log(request.session.user.username);
+  }
   // response.render tells application to find our template named "root"
 });
 
