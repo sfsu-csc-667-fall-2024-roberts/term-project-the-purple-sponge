@@ -44,8 +44,7 @@ router.post("/register", async (request, response) => {
   try {
     const user = await Users.register(username, email, password);
     // @ts-expect-error TODO: Define the session type for the user object
-    request.session.user = user;
-    // response.json(user);
+    request.session.user = user; // "logs in the user after registering"
     request.flash("success", "Your account was successfully created!");
     response.redirect("/");
   } catch (error) {
