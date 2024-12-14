@@ -9,6 +9,11 @@
   <body>
     <h1><%= title %></h1>
     <%- include('partials/header') %>
+    <% if (flashMessagesSuccess.length > 0) { %>
+      <div id="flash-message-display" class="alert alert-success">
+        <%= flashMessagesSuccess %>
+      </div>
+    <% } %>
     <div class="container">
       <nav>
         <li><a href="http://localhost:3000/auth/login">Login</a></li>
