@@ -27,7 +27,7 @@ router.post("/login", async (request, response) => {
   try {
     const user = await Users.login(email, password);
     // @ts-expect-error TODO: Define the session type for the user object
-    request.session.user = user;
+    request.session.user = user; // store the user object that is returned inside the request object for later use
     // response.json(user);
     request.flash("success", "Successfully logged in!");
     response.redirect("/");
