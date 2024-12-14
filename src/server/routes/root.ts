@@ -8,7 +8,10 @@ const router = express.Router();
 // };
 
 router.get("/", (request, response) => {
-  response.render("root", { title: "Welcome to the home page!" });
+  response.render("root", {
+    title: "Welcome to the home page!",
+    flashMessagesSuccess: request.flash("success"),
+  });
   // response.render tells application to find our template named "root"
 });
 

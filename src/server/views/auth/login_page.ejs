@@ -37,9 +37,9 @@
           <a href="/auth/register">Don't have an account yet?</a>
 
       <!-- Display any error messages here from express-flash -->
-      <% if(flashMessages.length > 0) { %>
+      <% if(flashMessagesError.length > 0) { %>
         <div id="flash-message-display" class="alert alert-danger">
-          <%= flashMessages %>
+          <%= flashMessagesError %>
         </div>
         <% } %>
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> -->

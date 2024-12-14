@@ -8,7 +8,8 @@ router.get("/login", (request, response) => {
   console.log("/login route called");
   response.render("auth/login_page", {
     title: "Login Page",
-    flashMessages: request.flash("error"),
+    flashMessagesError: request.flash("error"),
+    flashMessagesSuccess: request.flash("success"),
   });
 });
 
@@ -16,7 +17,8 @@ router.get("/register", (request, response) => {
   console.log("register route called");
   response.render("auth/signup_page", {
     title: "Register Page",
-    flashMessages: request.flash("error"),
+    flashMessagesError: request.flash("error"),
+    flashMessagesSuccess: request.flash("success"),
   });
 });
 
@@ -27,6 +29,7 @@ router.post("/login", async (request, response) => {
     // @ts-expect-error TODO: Define the session type for the user object
     request.session.user = user;
     // response.json(user);
+    request.flash("success", "Successfully logged in!");
     response.redirect("/");
   } catch (error) {
     console.error(error);
@@ -43,10 +46,11 @@ router.post("/register", async (request, response) => {
     // @ts-expect-error TODO: Define the session type for the user object
     request.session.user = user;
     // response.json(user);
+    request.flash("success", "Your account was successfully created!");
     response.redirect("/");
   } catch (error) {
     console.error(error);
-    request.flash("error", `${error}`);
+    request.flash("error", `Unable to register user: ${error}`);
     response.redirect("/auth/register");
   }
 });

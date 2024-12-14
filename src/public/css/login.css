@@ -10,6 +10,7 @@ a {
   text-align: center; /*element must be block-level to be center by text align*/
   display: block;
 }
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;

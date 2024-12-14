@@ -1,20 +1,27 @@
-/* center the body */
 html {
-  display: table;
-  margin: auto;
+  font-size: 16px;
+}
+
+h1 {
+  text-align: center;
+}
+
+a {
+  text-align: center; /*element must be block-level to be center by text align*/
+  display: block;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* max-width: 1200px; */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: fit-content;
+  width: 40%;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
 }
