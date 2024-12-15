@@ -1,3 +1,4 @@
+// handles all queries related with users
 export const REGISTER_SQL = `
 INSERT INTO users (username, email, password)
 VALUES ($1, $2, $3)
