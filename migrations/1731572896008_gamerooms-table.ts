@@ -6,6 +6,7 @@ export const shorthands: ColumnDefinitions | undefined = undefined;
 //   id integer [pk, increment]
 //   room_name varchar
 //   is_global boolean
+//   is_active boolean
 //   host_user_id integer
 //   max_players integer [not null]
 //   timer_speed integer [not null]
@@ -20,6 +21,9 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       unique: true,
     },
     is_global: {
+      type: "boolean",
+    },
+    is_active: {
       type: "boolean",
     },
     host_user_id: {
