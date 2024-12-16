@@ -1,0 +1,27 @@
+html {
+  font-size: 16px;
+}
+
+h1 {
+  text-align: center;
+}
+
+a {
+  text-align: center; /*element must be block-level to be center by text align*/
+  display: block;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  width: 40%;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
