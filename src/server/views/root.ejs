@@ -14,6 +14,11 @@
         <%= flashMessagesSuccess %>
       </div>
     <% } %>
+    <% if (flashMessagesError.length > 0) { %>
+      <div id="flash-message-display" class="alert alert-danger">
+        <%= flashMessagesError %>
+      </div>
+    <% } %>
     <div class="container">
       <nav>
         <ul>
