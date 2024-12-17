@@ -23,6 +23,18 @@ router.get("/waitinglobby/:id", (request, response) => {
   response.render("games/waiting_lobby", { title: `Gamelobby for ${id}` });
 });
 
+// retrieve all available gamerooms from the table and return array of objects containing
+// all info for each
+router.get("/getGames", async (request, response) => {
+  try {
+    const gameRooms = await Games.fetchAllGames();
+    // console.log("Retrieved gamerooms: ", gameRooms);
+    response.status(200).json(gameRooms);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 // create a game, link the host user to the game
 router.post("/create", async (request, response) => {
   console.log("request.body inside /create API", request.body);

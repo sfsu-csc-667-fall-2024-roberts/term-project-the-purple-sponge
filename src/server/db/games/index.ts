@@ -6,6 +6,7 @@ import {
   DELETE_SESS,
   SELECT_GAME,
   SELECT_SESS,
+  FETCH_ALL_GAMES,
 } from "./sql";
 
 // Types to help with everything
@@ -48,6 +49,11 @@ const createGame = async (
     max_players,
     timer_speed,
   ]);
+};
+
+// Fetch all games
+const fetchAllGames = async (): Promise<gameRoom[]> => {
+  return await db.many(FETCH_ALL_GAMES);
 };
 
 // Create a game session
@@ -104,6 +110,7 @@ const deleteSess = async (
 export default {
   createGame,
   createSess,
+  fetchAllGames,
   findGame,
   findSess,
   deleteGame,
