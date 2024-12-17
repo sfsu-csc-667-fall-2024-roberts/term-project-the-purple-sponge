@@ -20,8 +20,5 @@
 
 # Updating the Database After it has been changed
 
-There are two ways to reset and reload the database:
-
 1. In pgadmin4, delete every table manually including the migrations table
    Then run: `npm run db:migrate` inside your terminal to build back all the tables
-2. Repeatedly use `npm run db:rollback` until all the tables are removed and then run `npm run db:migrate`
