@@ -10,13 +10,14 @@
 
     <form method="post" action="/games/create">
       <div class="mb-3">
-        <label for="room_name" class="form-label">Gameroom Name</label>
+        <label for="room_name" class="form-label">Name of Game</label>
         <input
           type="text"
           id="room_name"
           name="room_name"
-          placeholder="Enter the gameroom's name"
+          placeholder="(max length 30 characters)"
           class="form-control"
+          maxlength="30"
           required
         />
       </div>
