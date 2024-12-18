@@ -8,11 +8,11 @@ const authenticationMiddleware = (
 ) => {
   // checks the request obj if there exists a user object
   // that was created during login
-  // @ts-expect-error TODO: Define the session type for the user object
+  // @ ts-expect-error TODO: Define the session type for the user object
   if (!request.session.user) {
     response.redirect("/auth/login");
   } else {
-    // @ts-expect-error TODO: Define the session type for the user object
+    // @ ts-expect-error TODO: Define the session type for the user object
     response.locals.user = request.session.user;
     next(); // this lets other functions continue
   }

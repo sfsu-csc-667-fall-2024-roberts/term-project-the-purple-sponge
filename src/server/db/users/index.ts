@@ -50,5 +50,11 @@ const findByEmail = async (email: string): Promise<User> => {
   return await db.one(FIND_BY_EMAIL_SQL, [email]);
 };
 
+declare module 'express-session' {
+  interface SessionData {
+    user: User;
+  }
+}
+
 export default { register, login, findByEmail };
 export type { User };

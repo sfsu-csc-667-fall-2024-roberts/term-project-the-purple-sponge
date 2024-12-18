@@ -21,9 +21,16 @@
     <% } %>
     <div class="container">
       <nav>
+        <% if (session.user) { %>
+          <div id="status">Currently logged in as <%= session.user.username %></div>
+        <% } %>
         <ul>
-          <li><a href="http://localhost:3000/auth/login">Login</a></li>
-          <li><a href="http://localhost:3000/auth/register">Sign Up</a></li>
+          <% if (session.user) { %>
+            <li><a href="http://localhost:3000/auth/logout">Log Out</a></li>
+          <% } else { %>
+            <li><a href="http://localhost:3000/auth/login">Login</a></li>
+            <li><a href="http://localhost:3000/auth/register">Sign Up</a></li>
+          <% } %>
           <li><a href="http://localhost:3000/games/waitinglobby/412">Waiting Lobby 412</a></li>
           <li><a href="http://localhost:3000/games/ingame/412">Game Screen 412</a></li>
           <li><a href="http://localhost:3000/games/creategame" class="btn btn-primary">Create a Game!</a></li>
