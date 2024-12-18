@@ -3,15 +3,13 @@ import bcrypt from "bcrypt";
 import db from "../connection";
 import { FIND_BY_EMAIL_SQL, REGISTER_SQL } from "./sql";
 
-// types for our convenience
+// types to check
 type User = {
   id: number;
   username: string;
   email: string;
-};
-
-type UserWithPassword = User & {
   password: string;
+  created_at: Date;
 };
 
 // Take in username, email, clearTextPassword
@@ -30,7 +28,10 @@ const register = async (
  *  Searches for matching user by email
  *  Verifies the clearTextPassword with the hashed version in the database
  */
-const login = async (email: string, clearTextPassword: string) => {
+const login = async (
+  email: string,
+  clearTextPassword: string
+): Promise<User> => {
   //TODO: errorhandle the case if user is not found and the promise rejects
   const user = await findByEmail(email);
 
@@ -44,9 +45,16 @@ const login = async (email: string, clearTextPassword: string) => {
   }
 };
 
-const findByEmail = async (email: string): Promise<UserWithPassword> => {
+const findByEmail = async (email: string): Promise<User> => {
   console.log("Searching user table by email...", email);
   return await db.one(FIND_BY_EMAIL_SQL, [email]);
 };
 
+declare module 'express-session' {
+  interface SessionData {
+    user: User;
+  }
+}
+
 export default { register, login, findByEmail };
+export type { User };

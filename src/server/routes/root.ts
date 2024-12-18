@@ -11,6 +11,8 @@ router.get("/", (request, response) => {
   response.render("root", {
     title: "Welcome to the home page!",
     flashMessagesSuccess: request.flash("success"),
+    flashMessagesError: request.flash("error"),
+    session: request.session
   });
   // response.render tells application to find our template named "root"
 });
