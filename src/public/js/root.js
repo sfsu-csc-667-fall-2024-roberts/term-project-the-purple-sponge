@@ -70,9 +70,24 @@ async function displayGames() {
       gameInfoRow.appendChild(room_name);
       gameInfoRow.appendChild(timer_speed);
       gameInfoRow.appendChild(max_players);
+
+      const join_link = document.createElement("form");
+      join_link.action = `http://localhost:3000/games/ingame/${gameroom.id}`;
+      join_link.method = "get";
+      join_link.style = "height:0;width:0";
+
+      const join_button = document.createElement("button");
+      join_button.innerHTML = "Join";
+      join_button.style = "height:35.51";
+      
+      join_link.appendChild(join_button);
+      gameInfoRow.appendChild(join_link);
+
       display.appendChild(gameInfoRow);
     });
   } catch (error) {
     console.error(error);
   }
 }
+
+document.getElementById
