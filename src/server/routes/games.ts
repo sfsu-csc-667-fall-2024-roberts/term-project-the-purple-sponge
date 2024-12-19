@@ -70,4 +70,22 @@ router.post("/create", async (request, response) => {
   }
 });
 
+router.put("/ingame/:id", async (request, response) => {
+  const { id } = request.params;
+  const user = request.session.user;
+
+  try {
+    // @ts-expect-error TODO: extend session with user type
+    const linkGameUser: gameLink = await UserConnect.makeUseGameLink(user.id, id);
+    console.log("userGame returned: ", linkGameUser);
+
+    response.render("games/game_screen", { title: `Gamescreen for ${id}` });
+  }
+  catch (e) {
+    console.error(e);
+    request.flash("error", `Unable to join game: ${e}`);
+    response.redirect("/");
+  }
+});
+
 export default router;
