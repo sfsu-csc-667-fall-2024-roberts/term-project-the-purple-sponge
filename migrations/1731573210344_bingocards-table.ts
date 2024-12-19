@@ -22,10 +22,10 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       references: "users",
     },
     card_data: {
-      type: "json",
+      type: "integer[5][5]",
     },
     card_marker_locations: {
-      type: "json",
+      type: "boolean[5][5]",
     },
     is_bingo: {
       type: "boolean",
