@@ -49,7 +49,7 @@ async function displayGames() {
 
       const join_link = document.createElement("form");
       join_link.action = `http://localhost:3000/games/ingame/${gameroom.id}`;
-      join_link.method = "put";
+      join_link.method = "post";
       join_link.style = "height:0;width:0";
 
       const join_button = document.createElement("button");

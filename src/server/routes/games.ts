@@ -40,6 +40,17 @@ router.post("/create", async (request, response) => {
   console.log("request.body inside /create API", request.body);
   const { room_name, max_players, timer_speed } = request.body;
 
+  // User will leave any games they had joined
+  try {
+    if (request.session.user) {
+      const linkGameUser: gameLink = await UserConnect.deleteUseGameLink(request.session.user.id);
+      console.log("Successfully left games: ", linkGameUser);
+    }
+  }
+  catch (e) {
+    console.error(e);
+  }
+
   // @ts-expect-error TODO: figure what type this needs to be
   const host_user_id = request.session.user.id; // grab the user id from stored login data
   try {
@@ -70,9 +81,20 @@ router.post("/create", async (request, response) => {
   }
 });
 
-router.put("/ingame/:id", async (request, response) => {
+router.post("/ingame/:id", async (request, response) => {
   const { id } = request.params;
   const user = request.session.user;
+
+  // User will leave any games they had joined
+  try {
+    if (request.session.user) {
+      const linkGameUser: gameLink = await UserConnect.deleteUseGameLink(request.session.user.id);
+      console.log("Successfully left games: ", linkGameUser);
+    }
+  }
+  catch (e) {
+    console.error(e);
+  }
 
   try {
     // @ts-expect-error TODO: extend session with user type
