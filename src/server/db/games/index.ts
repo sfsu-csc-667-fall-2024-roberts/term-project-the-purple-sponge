@@ -53,7 +53,7 @@ const createGame = async (
 
 // Fetch all games
 const fetchAllGames = async (): Promise<gameRoom[]> => {
-  return await db.many(FETCH_ALL_GAMES);
+  return await db.any(FETCH_ALL_GAMES);
 };
 
 // Create a game session
