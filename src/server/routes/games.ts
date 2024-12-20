@@ -10,9 +10,26 @@ const router = express.Router();
 // :id stores whatever number is there into params array of the request obj
 // id can be sent to the database to search for an already existing game
 // or create a new one
-router.get("/ingame/:id", (request, response) => {
+router.get("/ingame/:id", async (request, response) => {
   const { id } = request.params;
-  response.render("games/game_screen", { title: `Gamescreen for ${id}` });
+  try {
+    const gameLink = await UserConnect.findUseGameLink(parseInt(`${id}`));
+    let idnex = 0;
+    for (let link of gameLink) {
+      // @ts-expect-error TODO extend session with type later
+      if (link.user_id == request.session.user.id) {
+        response.render("games/game_screen", { title: `Gamescreen for ${id}` });
+        idnex += 1;
+      }
+    }
+    if (idnex === 0) {
+      response.redirect("/");
+    }
+  }
+  catch (e) {
+    // console.error(e);
+  }
+  
 });
 
 router.get("/creategame", (request, response) => {
@@ -31,9 +48,8 @@ router.get("/getGames", async (request, response) => {
     let gameRooms = await Games.fetchAllGames();
     if (gameRooms) {
       for (let gameroom of gameRooms) {
-        const count = await UserConnect.findUseGameLink(gameroom.id);
-        console.log("countwaawawawawa: ", count);
-        if (count === 0) {
+        const gameLink = await UserConnect.findUseGameLink(gameroom.id);
+        if (gameLink[0] == null) {
           Games.deleteGame(gameroom.id);
         }
       }
@@ -75,9 +91,9 @@ router.post("/create", async (request, response) => {
     // response.render("games/waiting_lobby", {
     //   title: `Gamelobby for ${linkGameUser.game_room_id}`,
     // });
-    response.render("games/game_screen", { title: `Gamescreen for ${gameroom.id}` });
     // @ts-expect-error TODO: extend session with type later
     request.session.roomId = parseInt(`${gameroom.id}`);
+    response.redirect(`ingame/${gameroom.id}`);
   } catch (error) {
     console.error(error);
     request.flash("error", `Unable to make game: ${error}`);
@@ -88,6 +104,19 @@ router.post("/create", async (request, response) => {
 router.post("/ingame/:id", async (request, response) => {
   const { id } = request.params;
   const user = request.session.user;
+
+  try {
+    const gameLink = await UserConnect.findUseGameLink(parseInt(`${id}`));
+    for (let link of gameLink) {
+      // @ts-expect-error TODO extend session with type later
+      if (link.user_id == request.session.user.id) {
+        response.render("games/game_screen", { title: `Gamescreen for ${id}` });
+      }
+    }
+  }
+  catch (e) {
+    // console.error(e);
+  }
 
   try {
     // @ts-expect-error TODO: extend session with type later

@@ -23,7 +23,7 @@ WHERE is_global=FALSE and is_active=TRUE `;
 // Finding games and game sessions
 export const SELECT_GAME = `
 SELECT id, room_name, is_global, is_active, host_user_id, max_players, timer_speed 
-FROM gamerooms WHERE host_user_id=$1 AND id=$2
+FROM gamerooms WHERE id=$1
 `;
 
 export const SELECT_SESS = `
@@ -54,3 +54,10 @@ RETURNING id
 export const LEAVE_GAME = `
 DELETE FROM lk_users_gamerooms WHERE user_id=$1 AND  gameroom_id=$2 AND id=$3
 `;
+
+// Timer
+export const SET_TIMER = `
+UPDATE gamerooms
+SET timer_start = $2
+WHERE id = $1
+`

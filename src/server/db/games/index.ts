@@ -7,6 +7,7 @@ import {
   SELECT_GAME,
   SELECT_SESS,
   FETCH_ALL_GAMES,
+  SET_TIMER,
 } from "./sql";
 
 // Types to help with everything
@@ -67,11 +68,10 @@ const createSess = async (gameroom_id: number): Promise<gameSess> => {
 */
 
 const findGame = async (
-  host_user_id: number,
   gameroom_id: number
 ): Promise<gameRoom> => {
   console.log("Getting information from Game " + gameroom_id);
-  return await db.one(SELECT_GAME, [host_user_id, gameroom_id]);
+  return await db.one(SELECT_GAME, [gameroom_id]);
 };
 
 const findSess = async (
@@ -106,6 +106,14 @@ const deleteSess = async (
   return await db.one(DELETE_SESS, [gameroom_id, gamesess_id]);
 };
 
+// Set timer start
+const setTimer = async (
+  gameroom_id: number,
+  timer_start: number
+): Promise<any> => {
+  return await db.any(SET_TIMER, [gameroom_id, timer_start]);
+}
+
 export default {
   createGame,
   createSess,
@@ -114,5 +122,6 @@ export default {
   findSess,
   deleteGame,
   deleteSess,
+  setTimer,
 };
 export type { gameRoom, gameSess };
