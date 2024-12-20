@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- TODO: 
  Take in input from a user using a textbox and somehow get it to move data
  have a submit button for chat
@@ -8,28 +8,21 @@
 -->
 
 <html>
+  <form id="chatBox">
+    <div id="messageContainer"></div>
+    <label for="chatBox">Message</label>
+    <input
+      type="text"
+      placeholder="Message goes here..."
+      id="chatInput"
+      name="chatInput"
+      class="form-control"
+      required
+    />
+    <button id="submitButton">Send</button>
+  </form>
 
-2022 shaheel laughing his ass off right now
-
-
-
-<section>
-    TYPE YOUR CHAT MESSAGE HERE:
-
-    <form id="chatbox" class="flex flex-row h-[20px] mt-[8px]">
-        <input ">
-    </form>
-
-    <p>
-        <input type="text" name="chatInput" id="chatInput">
-
-        <!-- this is the section for the form, above takes in input, below submits as a form-->
-        <button id="submitButton">
-            Send 
-        </button>
-
-    </p>
-</section>
-<script src="/js/clientchat.js"></script>
-<!--<script src="/src/server/config/sockets.ts"></script> --->
+  <!-- Below we are using the file that webpack generated form our ts folder in the client -->
+  <script src="/js/clientchat.js"></script>
+  <!--<script src="/src/server/config/sockets.ts"></script> --->
 </html>

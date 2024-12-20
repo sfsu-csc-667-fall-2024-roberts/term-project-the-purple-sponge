@@ -1,3 +1,13 @@
+form {
+  width: 40%;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* Styling the  gameroom display */
 #display-games {
   display: flex;
   flex-direction: column;
