@@ -72,9 +72,12 @@ router.post("/create", async (request, response) => {
     console.log("PRTS // userGame returned: ", linkGameUser);
 
     request.flash("success", "Your game was successfully created!");
-    response.render("games/waiting_lobby", {
-      title: `Gamelobby for ${linkGameUser.game_room_id}`,
-    });
+    // response.render("games/waiting_lobby", {
+    //   title: `Gamelobby for ${linkGameUser.game_room_id}`,
+    // });
+    response.render("games/game_screen", { title: `Gamescreen for ${gameroom.id}` });
+    // @ts-expect-error TODO: extend session with type later
+    request.session.roomId = parseInt(`${gameroom.id}`);
   } catch (error) {
     console.error(error);
     request.flash("error", `Unable to make game: ${error}`);

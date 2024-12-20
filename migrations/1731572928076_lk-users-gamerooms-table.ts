@@ -13,6 +13,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
     user_id: {
       type: "integer", // special type for foreign keys to reference an id
       references: "users",
+      unique: true
     },
     game_room_id: {
       type: "integer",
