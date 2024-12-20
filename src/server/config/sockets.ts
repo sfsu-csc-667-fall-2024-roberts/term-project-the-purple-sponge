@@ -19,9 +19,10 @@ const bindSession = async (socket: Socket) => {
   // socket.join(`chat-${roomId}`);
   // socket.join(`game-${roomId}`);
 
-  socket.join('test'); //added this line in rcently
+  socket.join("test"); //added this line in rcently
 
   socket.use((_, next) => {
+    console.log("Packet info: ", _);
     // @ts-expect-error TODO figure out the typing for session on request
     request.session.reload((error) => {
       if (error) {
@@ -41,7 +42,7 @@ export default function (
   if (io === undefined) {
     io = new SocketIoServer(server);
 
-    app.set("io", io);
+    app.set("io", io); // can be retreived later with app.get("io")
     io.engine.use(sessionMiddleware);
 
     io.on("connection", async (socket) => {
