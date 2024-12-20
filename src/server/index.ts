@@ -13,7 +13,7 @@ import * as configurations from "./config/configmanifest";
 import * as middleware from "./middleware/middlewaremanifest";
 
 const app = express();
-const server = createServer(app);
+const server = createServer(app); // create server for use with socket.io
 const PORT = process.env.PORT || 3000;
 
 app.use(morgan("dev"));

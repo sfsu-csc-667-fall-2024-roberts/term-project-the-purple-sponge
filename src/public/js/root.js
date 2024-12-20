@@ -15,6 +15,7 @@ async function displayGames() {
       throw new Error(`Response ${response.status}`);
     }
     const json = await response.json();
+    console.log("printing json: ", json);
     json.forEach((gameroom) => {
       const gameInfoRow = document.createElement("ul");
       gameInfoRow.classList.add("horizontal-list");
@@ -65,5 +66,3 @@ async function displayGames() {
     console.error(error);
   }
 }
-
-document.getElementById;
