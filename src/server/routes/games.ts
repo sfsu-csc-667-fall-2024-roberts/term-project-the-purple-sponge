@@ -28,7 +28,7 @@ router.get("/waitinglobby/:id", (request, response) => {
 router.get("/getGames", async (request, response) => {
   try {
     const gameRooms = await Games.fetchAllGames();
-    // console.log("Retrieved gamerooms: ", gameRooms);
+    // console.log("PRTS // Retrieved gamerooms: ", gameRooms);
     response.status(200).json(gameRooms);
   } catch (error) {
     console.error(error);
@@ -37,18 +37,18 @@ router.get("/getGames", async (request, response) => {
 
 // create a game, link the host user to the game
 router.post("/create", async (request, response) => {
-  console.log("request.body inside /create API", request.body);
+  console.log("PRTS // request.body inside /create API", request.body);
   const { room_name, max_players, timer_speed } = request.body;
 
   // User will leave any games they had joined
   try {
     if (request.session.user) {
       const linkGameUser: gameLink = await UserConnect.deleteUseGameLink(request.session.user.id);
-      console.log("Successfully left games: ", linkGameUser);
+      console.log("PRTS // Successfully left games: ", linkGameUser);
     }
   }
   catch (e) {
-    console.error(e);
+    // console.error(e);
   }
 
   // @ts-expect-error TODO: figure what type this needs to be
@@ -60,7 +60,7 @@ router.post("/create", async (request, response) => {
       max_players,
       timer_speed
     );
-    console.log("gameRoom returned: ", gameroom);
+    console.log("PRTS // gameRoom returned: ", gameroom);
     // maybe wait to create a session when everyone is in the game and the host officially starts the game???
     // const sess_id = await Games.createSess(game_id);
 
@@ -68,7 +68,7 @@ router.post("/create", async (request, response) => {
       host_user_id,
       gameroom.id
     );
-    console.log("userGame returned: ", linkGameUser);
+    console.log("PRTS // userGame returned: ", linkGameUser);
 
     request.flash("success", "Your game was successfully created!");
     response.render("games/waiting_lobby", {
@@ -89,19 +89,21 @@ router.post("/ingame/:id", async (request, response) => {
   try {
     if (request.session.user) {
       const linkGameUser: gameLink = await UserConnect.deleteUseGameLink(request.session.user.id);
-      console.log("Successfully left games: ", linkGameUser);
+      console.log("PRTS // Successfully left games: ", linkGameUser);
     }
   }
   catch (e) {
-    console.error(e);
+    // console.error(e);
   }
 
   try {
-    // @ts-expect-error TODO: extend session with user type
+    // @ts-expect-error TODO: extend session with type later
     const linkGameUser: gameLink = await UserConnect.makeUseGameLink(user.id, id);
-    console.log("userGame returned: ", linkGameUser);
+    console.log("PRTS // userGame returned: ", linkGameUser);
 
     response.render("games/game_screen", { title: `Gamescreen for ${id}` });
+    // @ts-expect-error TODO: extend session with type later
+    request.session.roomId = parseInt(`${id}`);
   }
   catch (e) {
     console.error(e);

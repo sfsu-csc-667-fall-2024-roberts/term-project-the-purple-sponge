@@ -46,7 +46,7 @@ eval("/**\n * Helpers.\n */\n\nvar s = 1000;\nvar m = s * 60;\nvar h = m * 60;\n
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconsole.log(\"hello from bundled asset\");\nconst socket_io_client_1 = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/build/cjs/index.js\");\nconst socket = (0, socket_io_client_1.io)();\nconsole.log(\"socket\", socket);\n\n\n//# sourceURL=webpack://term-project-bingo/./src/client/main.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconsole.log(\"hello from bundled asset\");\nconst socket_io_client_1 = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/build/cjs/index.js\");\n// const socket = io();\n// console.log(\"socket\", socket);\nwindow.socket = (0, socket_io_client_1.io)();\n\n\n//# sourceURL=webpack://term-project-bingo/./src/client/main.ts?");
 
 /***/ }),
 

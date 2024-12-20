@@ -14,11 +14,11 @@ router.get("/", async (request, response) => {
   try {
     if (request.session.user) {
       const linkGameUser: gameLink = await UserConnect.deleteUseGameLink(request.session.user.id);
-      console.log("Successfully left games: ", linkGameUser);
+      console.log("PRTS // Successfully left games: ", linkGameUser);
     }
   }
   catch (e) {
-    console.error(e);
+    // console.error(e);
   }
 
   response.render("root", {

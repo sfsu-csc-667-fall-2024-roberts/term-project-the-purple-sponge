@@ -19,7 +19,7 @@ const makeUseGameLink = async (
 const deleteUseGameLink = async (
   user_id: number
 ): Promise<gameLink> => {
-  console.log("User " + user_id + " leaving game");
+  // console.log("User " + user_id + " leaving game");
   return await db.one(LEAVE_GAME, [user_id]);
 };
 
