@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <title>Create Game</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/creategame.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <form method="post" action="/games/create">
+      <div class="mb-3">
+        <label for="room_name" class="form-label">Name of Game</label>
+        <input
+          type="text"
+          id="room_name"
+          name="room_name"
+          placeholder="(max length 30 characters)"
+          class="form-control"
+          maxlength="30"
+          required
+        />
+      </div>
+
+      <!-- <div id="emailHelp" class="form-text">Enter an email</div> -->
+
+      <div class="mb-3">
+        <label for="max_players" class="form-label"
+          >Max Amount of Players</label
+        >
+        <input
+          type="number"
+          id="max_players"
+          name="max_players"
+          class="form-control"
+          min="2"
+          max="10"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="timer_speed" class="form-label">Game Speed (seconds)</label>
+        <input
+          type="number"
+          id="timer_speed"
+          name="timer_speed"
+          class="form-control"
+          min="1"
+          max="10"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Create Gameroom</button>
+    </form>
+
+    <!-- Keep script tag at bottom of the body -->
+    <script src="/js/main.js"></script>
+  </body>
+</html>

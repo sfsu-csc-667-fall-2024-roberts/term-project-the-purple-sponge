@@ -16,23 +16,35 @@
         <%= flashMessagesSuccess %>
       </div>
     <% } %>
+    <% if (flashMessagesError.length > 0) { %>
+      <div id="flash-message-display" class="alert alert-danger">
+        <%= flashMessagesError %>
+      </div>
+    <% } %>
     <div class="container">
       <nav>
-        <li><a href="http://localhost:3000/auth/login">Login</a></li>
-        <li><a href="http://localhost:3000/auth/register">Sign Up</a></li>
-        <li><a href="http://localhost:3000/games/412/waitinglobby">Waiting Lobby 412</a></li>
-        <li><a href="http://localhost:3000/games/412">Game Screen 412</a></li>
+        <% if (session.user) { %>
+          <div id="status">Currently logged in as <%= session.user.username %></div>
+        <% } %>
+        <ul>
+          <% if (session.user) { %>
+            <li><a href="http://localhost:3000/auth/logout">Log Out</a></li>
+          <% } else { %>
+            <li><a href="http://localhost:3000/auth/login">Login</a></li>
+            <li><a href="http://localhost:3000/auth/register">Sign Up</a></li>
+          <% } %>
+          <li><a href="http://localhost:3000/games/waitinglobby/412">Waiting Lobby 412</a></li>
+          <li><a href="http://localhost:3000/games/ingame/412">Game Screen 412</a></li>
+          <li><a href="http://localhost:3000/games/creategame" class="btn btn-primary">Create a Game!</a></li>
+        </ul>
+
       </nav>
     </div>
     <article>
       Welcome to Bingo!
     </article>
 
-    <section>
-      List of game:
-      bing
-      bong
-      poo
+    <section id="display-games">
     </section>
 
     <aside>
@@ -48,6 +60,7 @@
 
     <!-- Keep script tag at bottom of the body -->
     <script src="/js/main.js"></script>
+    <script src="/js/root.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> -->
     <%- include('partials/footer') %>

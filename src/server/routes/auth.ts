@@ -26,8 +26,10 @@ router.post("/login", async (request, response) => {
   const { email, password } = request.body;
   try {
     const user = await Users.login(email, password);
-    // @ts-expect-error TODO: Define the session type for the user object
-    request.session.user = user;
+    console.log("user object in login: ", user);
+    // @ ts-expect-error TODO: Define the session type for the user object
+    // TODO: Maybe make this not store the hashed password in the request object???
+    request.session.user = user; // store the user object that is returned inside the request object for later use
     // response.json(user);
     request.flash("success", "Successfully logged in!");
     response.redirect("/");
@@ -43,9 +45,9 @@ router.post("/register", async (request, response) => {
   const { username, email, password } = request.body;
   try {
     const user = await Users.register(username, email, password);
-    // @ts-expect-error TODO: Define the session type for the user object
-    request.session.user = user;
-    // response.json(user);
+    console.log("Register user returned: ", user);
+    // @ ts-expect-error TODO: Define the session type for the user object
+    request.session.user = user; // "logs in the user after registering"
     request.flash("success", "Your account was successfully created!");
     response.redirect("/");
   } catch (error) {
