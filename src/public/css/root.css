@@ -13,11 +13,6 @@ form {
   flex-direction: column;
   row-gap: 4px;
 }
-.gameroom-list-style {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-}
 
 .horizontal-list {
   display: flex; /* Use flexbox */
@@ -28,6 +23,7 @@ form {
   gap: 4px; /* Add space between items */
   border-radius: 5px;
   background-color: rgb(216, 216, 216);
+  height: 3rem;
 }
 
 .horizontal-list li {
@@ -35,4 +31,16 @@ form {
   background-color: #f0f0f0; /* Optional: Add background color for visibility */
   border: 1px solid #ddd; /* Optional: Add border for styling */
   border-radius: 4px; /* Optional: Round the corners */
+}
+
+#join-button {
+  display: block;
+  background: #4e9caf;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  line-height: 25px;
+  text-decoration: none;
 }
