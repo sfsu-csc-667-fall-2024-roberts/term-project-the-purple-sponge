@@ -3,7 +3,8 @@ import {
     CREATE_CARD,
     DELETE_CARD,
     SELECT_CARD,
-    UPDATE_MARKED
+    UPDATE_MARKED,
+    CARD_EXISTS
 } from "./sql";
 
 // Datatype for card
@@ -25,7 +26,7 @@ function getRandomInt(max: number) {
 function makeNewCard() {
     var newCard:number[][] = [[-1,-1,-1,-1,-1],
                               [-1,-1,-1,-1,-1],
-                              [-1,-1,-1,-1,-1],
+                              [-1,-1,0,-1,-1],
                               [-1,-1,-1,-1,-1],
                               [-1,-1,-1,-1,-1]];
 
@@ -34,12 +35,18 @@ function makeNewCard() {
     var added:number[] = [-1,-1,-1,-1,-1];
 
     for (i = 0; i < 5; i++) {
+      // Ignore FREE space
+      if (i == 2) {
+        added[2] = 0;
+      }
+
       for (j = 0; j < 5; j++) {
-          // Keep generating number if there is duplicate
-          while(added.includes(newCard[i][j])) {
-            newCard[i][j] = (j * 15) + getRandomInt(15) + 1;
-          }
+        // Keep generating number if there is duplicate
+        while(added.includes(newCard[j][i])) {
+          newCard[j][i] = (i * 15) + getRandomInt(15) + 1;
         }
+      }
+
       // Reset checker
       added = [-1,-1,-1,-1,-1];
     }
@@ -58,7 +65,7 @@ const createCard = async (
     const newCard:number[][] = makeNewCard();
     const newMarked:boolean[][] = [[false,false,false,false,false],
                                    [false,false,false,false,false],
-                                   [false,false,false,false,false],
+                                   [false,false,true,false,false],
                                    [false,false,false,false,false],
                                    [false,false,false,false,false]]
 
@@ -72,32 +79,40 @@ const createCard = async (
 
 // Get a bingo card
 const findCard = async (
-    id: number,
     session_id: number, 
     user_id: number 
 ): Promise<bingoCard> => {
     console.log("Getting Bingo Card of " + user_id + " in Session " + session_id);
-    return await db.one(SELECT_CARD, [id, session_id, user_id]);
+    return await db.one(SELECT_CARD, [session_id, user_id]);
 };
 
 // Delete and existing bingo card
 const deleteCard = async (
-    id: number,
     session_id: number, 
     user_id: number 
 ): Promise<bingoCard> => {
     console.log("Deleting Bingo Card of " + user_id + " in Session " + session_id);
-    return await db.one(DELETE_CARD, [id, session_id, user_id]);
+    return await db.one(DELETE_CARD, [session_id, user_id]);
 };
 
 
 // Changes marked bingoCard
 const changeMarked = async (
     newMarked:boolean[][],
-    id: number,
     session_id: number, 
     user_id: number 
 ): Promise<bingoCard> => {
     console.log("Changing Bingo Card of " + user_id + " in Session " + session_id);
-    return await db.one(UPDATE_MARKED, [newMarked, id, session_id, user_id]);
+    return await db.one(UPDATE_MARKED, [newMarked, session_id, user_id]);
 };
+
+const cardExists = async (
+    session_id: number, 
+    user_id: number 
+): Promise<boolean> => {
+    console.log("Findimg Bingo Card of " + user_id + " in Session " + session_id);
+    return await db.one(CARD_EXISTS, [session_id, user_id]);
+};
+
+
+export default {createCard, findCard, deleteCard, changeMarked, cardExists};

@@ -6,18 +6,29 @@ RETURNING *`;
 
 export const DELETE_CARD = `
 DELETE FROM bingocards
-WHERE id=$1 AND session_id=$2 AND user_id=$3 
+WHERE session_id=$1 AND user_id=$2 
 RETURNING *`;
 
 // Getting entry of a card
 export const SELECT_CARD = `
 SELECT *
-FROM bingocards WHERE id=$1 AND session_id=$2 AND user_id=$3
+FROM bingocards WHERE session_id=$1 AND user_id=$2
 `;
 
 // Saves changes to marked (Assuming it means that true spaces are numbers drawn in the game)
 export const UPDATE_MARKED = `
 UPDATE bingocards
 SET card_marker_locations=$1
-WHERE id=$2 AND session_id=$3 AND user_id=$4
+WHERE session_id=$2 AND user_id=$3
 RETURNING *`;
+
+// Check for the existence of a card
+export const CARD_EXISTS = `
+SELECT CASE WHEN EXIST (
+    SELECT *
+    FROM bingocards 
+    WHERE session_id=$1 AND user_id=$2
+)
+THEN RETURNING TRUE
+ELSE RETURNING FALSE
+`;
