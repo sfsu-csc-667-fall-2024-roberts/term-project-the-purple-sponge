@@ -34,14 +34,14 @@ FROM game_sessions WHERE gameroom_id=$1 AND id=$2
 // Deletion of two separate entries representing a game
 export const DELETE_GAME = `
 DELETE FROM gamerooms 
-WHERE host_user_id=$1 AND id=$2
-RETURNING id
+WHERE id=$1
+RETURNING $1
 `;
 
 export const DELETE_SESS = `
 DELETE FROM game_sessions 
 WHERE gameroom_id=$1 AND id=$2
-RETURNING id
+RETURNING $2
 `;
 
 // Addition and Deletion of an entry representing a player's connection to a game

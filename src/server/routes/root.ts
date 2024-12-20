@@ -10,17 +10,6 @@ const router = express.Router();
 // };
 
 router.get("/", async (request, response) => {
-  // User will leave any games they had joined
-  try {
-    if (request.session.user) {
-      const linkGameUser: gameLink = await UserConnect.deleteUseGameLink(request.session.user.id);
-      console.log("PRTS // Successfully left games: ", linkGameUser);
-    }
-  }
-  catch (e) {
-    // console.error(e);
-  }
-
   response.render("root", {
     title: "Welcome to the home page!",
     flashMessagesSuccess: request.flash("success"),

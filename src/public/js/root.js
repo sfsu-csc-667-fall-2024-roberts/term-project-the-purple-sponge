@@ -65,5 +65,3 @@ async function displayGames() {
     console.error(error);
   }
 }
-
-document.getElementById;

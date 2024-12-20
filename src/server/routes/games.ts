@@ -3,6 +3,7 @@ import db from "../db/connection";
 import { Games, UserConnect } from "../db/dbmanifest";
 import type { gameRoom, gameSess } from "../db/games"; // typescript types import
 import type { gameLink } from "../db/userGames"; // typescript types import
+import { request } from "http";
 
 const router = express.Router();
 
@@ -27,7 +28,18 @@ router.get("/waitinglobby/:id", (request, response) => {
 // all info for each
 router.get("/getGames", async (request, response) => {
   try {
-    const gameRooms = await Games.fetchAllGames();
+    let gameRooms = await Games.fetchAllGames();
+    if (gameRooms) {
+      for (let gameroom of gameRooms) {
+        const count = await UserConnect.findUseGameLink(gameroom.id);
+        console.log("countwaawawawawa: ", count);
+        if (count === 0) {
+          Games.deleteGame(gameroom.id);
+        }
+      }
+    }
+
+    gameRooms = await Games.fetchAllGames();
     // console.log("PRTS // Retrieved gamerooms: ", gameRooms);
     response.status(200).json(gameRooms);
   } catch (error) {
@@ -39,17 +51,6 @@ router.get("/getGames", async (request, response) => {
 router.post("/create", async (request, response) => {
   console.log("PRTS // request.body inside /create API", request.body);
   const { room_name, max_players, timer_speed } = request.body;
-
-  // User will leave any games they had joined
-  try {
-    if (request.session.user) {
-      const linkGameUser: gameLink = await UserConnect.deleteUseGameLink(request.session.user.id);
-      console.log("PRTS // Successfully left games: ", linkGameUser);
-    }
-  }
-  catch (e) {
-    // console.error(e);
-  }
 
   // @ts-expect-error TODO: figure what type this needs to be
   const host_user_id = request.session.user.id; // grab the user id from stored login data
@@ -85,17 +86,6 @@ router.post("/ingame/:id", async (request, response) => {
   const { id } = request.params;
   const user = request.session.user;
 
-  // User will leave any games they had joined
-  try {
-    if (request.session.user) {
-      const linkGameUser: gameLink = await UserConnect.deleteUseGameLink(request.session.user.id);
-      console.log("PRTS // Successfully left games: ", linkGameUser);
-    }
-  }
-  catch (e) {
-    // console.error(e);
-  }
-
   try {
     // @ts-expect-error TODO: extend session with type later
     const linkGameUser: gameLink = await UserConnect.makeUseGameLink(user.id, id);
@@ -109,6 +99,21 @@ router.post("/ingame/:id", async (request, response) => {
     console.error(e);
     request.flash("error", `Unable to join game: ${e}`);
     response.redirect("/");
+  }
+});
+
+router.post("/leave", async (request, response) => {
+  // User will leave any games they had joined
+  try {
+    if (request.session.user) {
+      const linkGameUser: gameLink = await UserConnect.deleteUseGameLink(request.session.user.id);
+      // @ts-expect-error TODO extend session with type later
+      request.session.roomId = 0;
+      console.log("PRTS // Successfully left games: ", linkGameUser);
+    }
+  }
+  catch (e) {
+    // console.error(e);
   }
 });
 

@@ -89,11 +89,10 @@ const findSess = async (
 
 // Delete a new game
 const deleteGame = async (
-  host_user_id: number,
   gameroom_id: number
-): Promise<gameRoom> => {
+): Promise<number> => {
   console.log("Deleting Game " + gameroom_id);
-  return await db.one(DELETE_GAME, [host_user_id, gameroom_id]);
+  return await db.one(DELETE_GAME, [gameroom_id]);
 };
 
 // Delet a game session
