@@ -9,6 +9,8 @@
   <body>
     <h1><%= title %></h1>
     <%- include('partials/header') %>
+    <%- include('partials/chat') %>
+    <%- include('partials/bingocard') %>
     <% if (flashMessagesSuccess.length > 0) { %>
       <div id="flash-message-display" class="alert alert-success">
         <%= flashMessagesSuccess %>

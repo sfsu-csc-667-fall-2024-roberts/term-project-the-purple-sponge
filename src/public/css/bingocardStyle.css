@@ -1,0 +1,21 @@
+input[type=checkbox]
+{
+    display: none;
+}
+
+
+input[type=checkbox] + label
+{
+    background: aqua ;
+    width: 5em;
+    height: 5em;
+    padding: 20px;
+    border: 5px solid salmon;
+
+}
+
+input[type=checkbox]:checked + label
+{
+    background: blueviolet;
+
+}

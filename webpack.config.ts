@@ -8,7 +8,8 @@ const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development
 
 const config: webpack.Configuration = {
   entry: {
-    main: path.join(process.cwd(), 'src', 'client', 'main.ts')
+    main: path.join(process.cwd(), 'src', 'client', 'main.ts'),
+    clientchat: path.join(process.cwd(), "src", "client", "clientchat.ts")
   },
   mode,
   output: {

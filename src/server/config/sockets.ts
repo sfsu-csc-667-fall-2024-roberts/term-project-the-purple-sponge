@@ -19,6 +19,8 @@ const bindSession = async (socket: Socket) => {
   // socket.join(`chat-${roomId}`);
   // socket.join(`game-${roomId}`);
 
+  socket.join('test'); //added this line in rcently
+
   socket.use((_, next) => {
     // @ts-expect-error TODO figure out the typing for session on request
     request.session.reload((error) => {
