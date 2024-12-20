@@ -7,15 +7,10 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
   </head>
   <body>
+
     <h1><%= title %></h1>
-    <%- include('partials/header') %>
-    <%- include('partials/chat') %>
-    <%- include('partials/bingocard') %>
-    <% if (flashMessagesSuccess.length > 0) { %>
-      <div id="flash-message-display" class="alert alert-success">
-        <%= flashMessagesSuccess %>
-      </div>
-    <% } %>
+    <!-- <%- include('partials/header') %> --->
+
     <div class="container">
       <nav>
         <li><a href="http://localhost:3000/auth/login">Login</a></li>
@@ -24,17 +19,32 @@
         <li><a href="http://localhost:3000/games/412">Game Screen 412</a></li>
       </nav>
     </div>
+
     <article>
-      Welcome to Bingo!
+      <h2>Welcome to Bingo!</h2>
     </article>
 
-    <section>
-      List of game:
-      bing
-      bong
-      poo
-    </section>
+    <br>
 
+    <h3>List of Games:</h3> 
+    <section id="GameBox">
+      <li>bing</li>
+      <li>bong</li>
+      <li>poo</li>
+    </section>
+    
+
+    
+
+    <%- include('partials/chat') %>
+    <%- include('partials/bingocard') %>
+    <% if (flashMessagesSuccess.length > 0) { %>
+      <div id="flash-message-display" class="alert alert-success">
+        <%= flashMessagesSuccess %>
+      </div>
+    <% } %>
+
+    <!--
     <aside>
       <div>
         Hello chat (Now you can use this)
@@ -45,6 +55,7 @@
         <input type="submit" id="send-msg" name="all-chat-send" value="Submit">
       </form>
     </aside>
+    -->
 
     <!-- Keep script tag at bottom of the body -->
     <script src="/js/main.js"></script>
