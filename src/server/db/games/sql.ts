@@ -61,3 +61,9 @@ UPDATE gamerooms
 SET timer_start = $2
 WHERE id = $1
 `
+
+export const GET_TIMER = `
+SELECT timer_start
+FROM gamerooms
+WHERE id = $1
+`

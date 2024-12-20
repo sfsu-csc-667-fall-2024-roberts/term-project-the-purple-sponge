@@ -4,6 +4,7 @@ import { Games, UserConnect } from "../db/dbmanifest";
 import type { gameRoom, gameSess } from "../db/games"; // typescript types import
 import type { gameLink } from "../db/userGames"; // typescript types import
 import { request } from "http";
+import { Request, Response, NextFunction } from "express";
 
 const router = express.Router();
 
@@ -148,5 +149,20 @@ router.post("/leave", async (request, response) => {
     // console.error(e);
   }
 });
+
+export const gameUpdate = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  const socket = request.app.get("io");
+
+  const id = request.params.gameId;
+  const gameLink = await UserConnect.findUseGameLink(parseInt(id));
+
+  for (let link of gameLink) {
+    socket.to(`user-${link.user_id}`).emit(`game-${id}-update`);
+  }
+};
 
 export default router;
