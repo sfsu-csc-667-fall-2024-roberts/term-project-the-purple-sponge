@@ -1,87 +1,81 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #c1b0ff;
-  }
-
-div
-{
-    width: 40%;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: 2px solid #9e83ff;
-    border-radius: 20px;
-    background-color: #e4e4ff;
-
+  font-family: Arial, sans-serif;
+  background-color: #c1b0ff;
 }
 
-a
-{
-    color: black;
+/* div {
+  width: 40%;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 2px solid #9e83ff;
+  border-radius: 20px;
+  background-color: #e4e4ff;
+} */
+
+a {
+  color: black;
 }
 
-nav
-{
-    list-style-type: none;
-    border: 10px;
-    margin: auto;
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 7rem;
+ul {
+  list-style-type: none;
+  border: 10px;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7rem;
 }
 
-li
-{
-    border: 3px solid #c1b0ff;
-    background-color: #ede6ff;
-    border-radius: 10px;
-    width: 200px;
-    text-align: center;
-    color: black;
+/* li {
+  border: 3px solid #c1b0ff;
+  background-color: #ede6ff;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+  color: black;
+} */
+
+h1 {
+  text-align: center;
 }
 
-
-h1
-{
-    text-align: center;
+article {
+  justify-content: center;
+  display: flex;
+  border: 3px solid #c1b0ff;
+  background-color: #ede6ff;
 }
 
-article
-{
-    justify-content: center;
-    display: flex;
-    border: 3px solid #c1b0ff;
-    background-color: #ede6ff;
+h3 {
+  text-align: center;
 }
 
-
-h3
-{
-    text-align: center;  
+#GameBox {
+  list-style-type: none;
+  border: 10px;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 7rem;
 }
 
-#GameBox
-{
-    list-style-type: none;
-    border: 10px;
-    margin: auto;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    gap: 7rem;
+form {
+  width: 40%;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  flex-direction: column;
 }
 
-
+/* Styling the  gameroom display */
 #display-games {
   display: flex;
   flex-direction: column;
   row-gap: 4px;
-}
-.gameroom-list-style {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
 }
 
 .horizontal-list {
@@ -93,6 +87,7 @@ h3
   gap: 4px; /* Add space between items */
   border-radius: 5px;
   background-color: rgb(216, 216, 216);
+  height: 3rem;
 }
 
 .horizontal-list li {
@@ -100,4 +95,19 @@ h3
   background-color: #f0f0f0; /* Optional: Add background color for visibility */
   border: 1px solid #ddd; /* Optional: Add border for styling */
   border-radius: 4px; /* Optional: Round the corners */
+}
+
+#join-button {
+  display: block;
+  background: #4e9caf;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  line-height: 25px;
+  text-decoration: none;
+}
+
+#messageContainer {
 }

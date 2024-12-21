@@ -1,11 +1,11 @@
-window.onload = displayGames();
+window.onload = displayGames(); // run upon loading page
 
 async function displayGames() {
   const display = document.getElementById("display-games"); // unordered list
 
   // checks if null or undefined
   if (display == undefined) {
-    console.log("unable to get display games element!");
+    console.error("Error: unable to get display games element!");
     return;
   }
 
@@ -22,7 +22,7 @@ async function displayGames() {
       console.log("gameInfoRow: ", gameroom);
 
       const room_name = document.createElement("li");
-      const textNodeName = document.createTextNode(` ${gameroom.room_name}`);
+      const textNodeName = document.createTextNode(`${gameroom.room_name}`);
       room_name.appendChild(textNodeName);
 
       const id = document.createElement("li");
@@ -47,16 +47,11 @@ async function displayGames() {
       gameInfoRow.appendChild(timer_speed);
       gameInfoRow.appendChild(max_players);
 
-      const join_link = document.createElement("form");
-      join_link.action = `http://localhost:3000/games/ingame/${gameroom.id}`;
-      join_link.method = "post";
-      join_link.style = "height:0;width:0";
-
-      const join_button = document.createElement("button");
-      join_button.innerHTML = "Join";
-      join_button.style = "height:35.51";
-
-      join_link.appendChild(join_button);
+      // make join button an anchor tag stylized as a button
+      let join_link = document.createElement("a");
+      join_link.setAttribute("href", `/games/ingame/${gameroom.id}`);
+      join_link.setAttribute("id", "join-button");
+      join_link.innerText = "Join";
       gameInfoRow.appendChild(join_link);
 
       display.appendChild(gameInfoRow);

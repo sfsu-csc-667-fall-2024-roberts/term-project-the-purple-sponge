@@ -9,13 +9,7 @@
   <body>
 
     <h1><%= title %></h1>
-<<<<<<< HEAD
-    <!-- <%- include('partials/header') %> --->
-
-=======
     <%- include('partials/header') %>
-    <%- include('partials/chat') %>
-    <%- include('partials/bingocard') %>
     <% if (flashMessagesSuccess.length > 0) { %>
       <div id="flash-message-display" class="alert alert-success">
         <%= flashMessagesSuccess %>
@@ -26,7 +20,6 @@
         <%= flashMessagesError %>
       </div>
     <% } %>
->>>>>>> b393c92d818f285b92e39e46f5befc790ea44dc1
     <div class="container">
       <nav>
         <% if (session.user) { %>
@@ -43,31 +36,18 @@
           <li><a href="http://localhost:3000/games/ingame/412">Game Screen 412</a></li>
           <li><a href="http://localhost:3000/games/creategame" class="btn btn-primary">Create a Game!</a></li>
         </ul>
-
       </nav>
+
     </div>
 
     <article>
       <h2>Welcome to Bingo!</h2>
     </article>
 
-<<<<<<< HEAD
-    <br>
-=======
-    <section id="display-games">
-    </section>
->>>>>>> b393c92d818f285b92e39e46f5befc790ea44dc1
-
     <h3>List of Games:</h3> 
-    <section id="GameBox">
-      <li>bing</li>
-      <li>bong</li>
-      <li>poo</li>
-    </section>
+    <section id="display-games">
+   </section>
     
-
-    
-
     <%- include('partials/chat') %>
     <%- include('partials/bingocard') %>
     <% if (flashMessagesSuccess.length > 0) { %>
