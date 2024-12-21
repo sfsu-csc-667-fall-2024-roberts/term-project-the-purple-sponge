@@ -13,7 +13,7 @@ RETURNING *`;
 export const CREATE_GAME_GLOBAL = `
 INSERT INTO gamerooms(room_name, is_global, is_active, host_user_id, max_players, timer_speed)
 VALUES ('Global Chat Room', TRUE, TRUE, 0, $1, 0)
-`;
+RETURNING *`;
 
 // Search for all gamerooms EXCLUDING global rooms and inactive ones
 export const FETCH_ALL_GAMES = `
@@ -27,7 +27,7 @@ FROM gamerooms WHERE id=$1
 `;
 
 export const SELECT_SESS = `
-SELECT id, gameroom_id, is_active, is_gameover 
+SELECT * 
 FROM game_sessions WHERE gameroom_id=$1 AND id=$2
 `;
 
@@ -48,8 +48,7 @@ RETURNING $2
 export const JOIN_GAME = `
 INSERT INTO lk_users_gamerooms (user_id, gameroom_id)
 VALUES ($1, $2)
-RETURNING id
-`;
+RETURNING *`;
 
 export const LEAVE_GAME = `
 DELETE FROM lk_users_gamerooms WHERE user_id=$1 AND  gameroom_id=$2 AND id=$3

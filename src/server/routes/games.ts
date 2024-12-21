@@ -1,6 +1,6 @@
 import express from "express"; // need to do it the ES6 way to avoid false errors with typescript
 import db from "../db/connection";
-import { Games, UserConnect } from "../db/dbmanifest";
+import { Games, UserConnect, bingoGame } from "../db/dbmanifest";
 import type { gameRoom, gameSess } from "../db/games"; // typescript types import
 import type { gameLink } from "../db/userGames"; // typescript types import
 import { request } from "http";
@@ -123,6 +123,22 @@ router.post("/ingame/:id", async (request, response) => {
     // @ts-expect-error TODO: extend session with type later
     const linkGameUser: gameLink = await UserConnect.makeUseGameLink(user.id, id);
     console.log("PRTS // userGame returned: ", linkGameUser);
+
+    // TODO: how to get session number or do we use game number
+
+    /*
+      Create a new bingo card for the game if none exist;
+      Else just use the existing bingo card for the game
+    */
+
+    // @ts-expect-error TODO: Set string to number type
+    if (await bingoGame.cardExists(id, user.id)) {
+      // @ts-expect-error TODO: Set string to number type
+      await bingoGame.findCard(id, user.id);
+    } else {
+      // @ts-expect-error TODO: Set string to number type
+      await bingoGame.createCard(id, user.id);
+    }
 
     response.render("games/game_screen", { title: `Gamescreen for ${id}` });
     // @ts-expect-error TODO: extend session with type later
