@@ -9,6 +9,7 @@ import {
   FETCH_ALL_GAMES,
   SET_TIMER,
   GET_TIMER,
+  CALL_NUMBER
 } from "./sql";
 
 // Types to help with everything
@@ -122,6 +123,14 @@ const getTimer = async (
   return await db.any(GET_TIMER, [gameroom_id]);
 }
 
+// Call number
+const callNumber = async (
+  gameroom_id: number,
+  number: number
+): Promise<any> => {
+  return await db.any(CALL_NUMBER, [gameroom_id, number]);
+}
+
 export default {
   createGame,
   createSess,
@@ -131,6 +140,7 @@ export default {
   deleteGame,
   deleteSess,
   setTimer,
-  getTimer
+  getTimer,
+  callNumber
 };
 export type { gameRoom, gameSess };

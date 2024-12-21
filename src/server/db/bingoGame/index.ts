@@ -114,5 +114,4 @@ const cardExists = async (
     return await db.one(CARD_EXISTS, [session_id, user_id]);
 };
 
-
 export default {createCard, findCard, deleteCard, changeMarked, cardExists};

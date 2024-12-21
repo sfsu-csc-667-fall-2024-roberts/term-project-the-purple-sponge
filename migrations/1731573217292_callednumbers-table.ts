@@ -11,9 +11,8 @@ export const shorthands: ColumnDefinitions | undefined = undefined;
 export async function up(pgm: MigrationBuilder): Promise<void> {
   pgm.createTable("called_numbers", {
     id: "id", // shorthand for { type 'serial', primaryKey: true }
-    session_id: {
+    room_id: {
       type: "integer",
-      references: "game_sessions",
     },
     number: {
       type: "integer", // called number 1 to 75

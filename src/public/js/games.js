@@ -14,9 +14,9 @@
 /*!*****************************!*\
   !*** ./src/client/games.ts ***!
   \*****************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, exports) => {
 
-eval("\nwindow.addEventListener(\"beforeunload\", function (e) {\n    fetch(`/games/leave`, {\n        method: \"post\",\n        keepalive: true\n    }).then((response) => {\n        if (response.status !== 200) {\n            console.error(response);\n        }\n    });\n});\n\n\n//# sourceURL=webpack://term-project-bingo/./src/client/games.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.update = void 0;\nwindow.addEventListener(\"beforeunload\", function (e) {\n    fetch(`/games/leave`, {\n        method: \"post\",\n        keepalive: true\n    }).then((response) => {\n        if (response.status !== 200) {\n            console.error(response);\n        }\n    });\n});\nconst roomId = parseInt(window.location.pathname.substring(14));\nwindow.socket.on(`game-${roomId}-update`, (socket) => {\n    (0, exports.update)(socket);\n});\nconst update = (socket) => {\n    //\n};\nexports.update = update;\n\n\n//# sourceURL=webpack://term-project-bingo/./src/client/games.ts?");
 
 /***/ })
 
@@ -25,9 +25,9 @@ eval("\nwindow.addEventListener(\"beforeunload\", function (e) {\n    fetch(`/ga
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/client/games.ts"]();
+/******/ 	__webpack_modules__["./src/client/games.ts"](0, __webpack_exports__);
 /******/ 	
 /******/ })()
 ;

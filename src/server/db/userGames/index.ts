@@ -26,7 +26,7 @@ const deleteUseGameLink = async (
 const findUseGameLink = async (
   gameroom_id: number
 ): Promise<any> => {
-  console.log("Searching for users in Game: " + gameroom_id);
+  // console.log("Searching for users in Game: " + gameroom_id);
   return await db.any(FIND_GAME, [gameroom_id]);
 }
 

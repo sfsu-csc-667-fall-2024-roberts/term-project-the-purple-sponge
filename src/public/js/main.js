@@ -46,7 +46,7 @@ eval("/**\n * Helpers.\n */\n\nvar s = 1000;\nvar m = s * 60;\nvar h = m * 60;\n
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconsole.log(\"hello from bundled asset\");\nconst socket_io_client_1 = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/build/cjs/index.js\");\nwindow.socket = (0, socket_io_client_1.io)();\n\n\n//# sourceURL=webpack://term-project-bingo/./src/client/main.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconsole.log(\"hello this file test whether webpack successfully bundled the assets together\");\nconst socket_io_client_1 = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/build/cjs/index.js\");\n// This makes the connection from the client to the server\n// and pins it to the global window object of the browser\nwindow.socket = (0, socket_io_client_1.io)();\n\n\n//# sourceURL=webpack://term-project-bingo/./src/client/main.ts?");
 
 /***/ }),
 

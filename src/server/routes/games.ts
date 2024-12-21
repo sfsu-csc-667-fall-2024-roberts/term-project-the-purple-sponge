@@ -131,14 +131,14 @@ router.post("/ingame/:id", async (request, response) => {
       Else just use the existing bingo card for the game
     */
 
-    // @ts-expect-error TODO: Set string to number type
-    if (await bingoGame.cardExists(id, user.id)) {
-      // @ts-expect-error TODO: Set string to number type
-      await bingoGame.findCard(id, user.id);
-    } else {
-      // @ts-expect-error TODO: Set string to number type
-      await bingoGame.createCard(id, user.id);
-    }
+    // // @ts-expect-error TODO: Set string to number type
+    // if (await bingoGame.cardExists(id, user.id)) {
+    //   // @ts-expect-error TODO: Set string to number type
+    //   await bingoGame.findCard(id, user.id);
+    // } else {
+    //   // @ts-expect-error TODO: Set string to number type
+    //   await bingoGame.createCard(id, user.id);
+    // }
 
     response.render("games/game_screen", { title: `Gamescreen for ${id}` });
     // @ts-expect-error TODO: extend session with type later
@@ -166,6 +166,32 @@ router.post("/leave", async (request, response) => {
   }
 });
 
+router.post("/ingame/:id/start", async (request, response) => {
+  const {id} = request.params;
+
+  const hold = await Games.getTimer(parseInt(id));
+  if (hold[0].timer_start === null) {
+    const gameroom = await Games.findGame(parseInt(id));
+    await Games.setTimer(parseInt(id),gameroom.timer_speed);
+
+    const place = (await Games.getTimer(parseInt(id)))[0].timer_start;
+
+    let idnex = 0;
+    const loop = setInterval(async function() {
+      idnex += 1;
+      const call = await Games.callNumber(parseInt(id), (Math.floor(Math.random() * 75) + 1));
+      console.log("PRTS " + `${id} // ${idnex} `, call[0].number);
+
+      const gameLink = await UserConnect.findUseGameLink(parseInt(id));
+      if (gameLink[0] == null) {
+        console.log("PRTS " + `${id} // STOPPEB`);
+        clearInterval(loop);
+      }
+    }, (place)*1000);
+    
+  }
+});
+
 export const gameUpdate = async (
   request: Request,
   response: Response,
@@ -176,9 +202,13 @@ export const gameUpdate = async (
   const id = request.params.gameId;
   const gameLink = await UserConnect.findUseGameLink(parseInt(id));
 
-  for (let link of gameLink) {
-    socket.to(`user-${link.user_id}`).emit(`game-${id}-update`);
+  if (gameLink[0] !== null) {
+    for (let link of gameLink) {
+      socket.to(`user-${link.user_id}`).emit(`game-${id}-update`);
+    }
   }
+
+  next();
 };
 
 export default router;

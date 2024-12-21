@@ -8,3 +8,12 @@ window.addEventListener("beforeunload", function(e) {
         }
     });
 });
+
+const roomId = parseInt(window.location.pathname.substring(14));
+window.socket.on(`game-${roomId}-update`, (socket) => {
+    update(socket);
+});
+
+export const update = (socket: any) => {
+    //
+};

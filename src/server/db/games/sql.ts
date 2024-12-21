@@ -66,3 +66,9 @@ SELECT timer_start
 FROM gamerooms
 WHERE id = $1
 `
+
+export const CALL_NUMBER = `
+INSERT INTO called_numbers (room_id, number)
+VALUES ($1, $2)
+RETURNING *
+`
