@@ -39,14 +39,14 @@ eval("/**\n * Helpers.\n */\n\nvar s = 1000;\nvar m = s * 60;\nvar h = m * 60;\n
 
 /***/ }),
 
-/***/ "./src/client/main.ts":
-/*!****************************!*\
-  !*** ./src/client/main.ts ***!
-  \****************************/
+/***/ "./src/client/clientchat.ts":
+/*!**********************************!*\
+  !*** ./src/client/clientchat.ts ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconsole.log(\"hello from bundled asset\");\nconst socket_io_client_1 = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/build/cjs/index.js\");\nwindow.socket = (0, socket_io_client_1.io)();\n\n\n//# sourceURL=webpack://term-project-bingo/./src/client/main.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst socket_io_client_1 = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/build/cjs/index.js\");\n//this grabs the input from the user and logs it\nconst chatbox = document.getElementById(\"chatbox\");\ndocument.getElementById(\"submitButton\").addEventListener(\"click\", function () {\n    console.log(document.getElementById(\"chatInput\").value);\n});\nconst socket = (0, socket_io_client_1.io)();\n//step 1: grab the text input from the user\n//(document.getElementById(\"chatInput\")! as HTMLInputElement).value\n//step 2: open/connect to the websocket\n//step 3: throw the text input into the websocket\nchatbox === null || chatbox === void 0 ? void 0 : chatbox.addEventListener(\"submit\", function (e) {\n    e.preventDefault();\n    socket.emit(document.getElementById(\"chatInput\").value);\n    document.getElementById(\"chatInput\").value = ' ';\n});\n//step 4: display the text\nconst chatMessage = document.createElement(\"p\");\nchatMessage.innerHTML = (\"\" + document.getElementById(\"chatInput\"));\nchatbox.appendChild(chatMessage);\nchatbox.scrollTo(0, 10);\n\n\n//# sourceURL=webpack://term-project-bingo/./src/client/clientchat.ts?");
 
 /***/ }),
 
@@ -429,7 +429,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/client/main.ts");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/client/clientchat.ts");
 /******/ 	
 /******/ })()
 ;
