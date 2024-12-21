@@ -8,8 +8,11 @@
   </head>
   <body>
 
-    <!-- <%- include('partials/bingocard') %> -->
     <h1><%= title %></h1>
+<<<<<<< HEAD
+    <!-- <%- include('partials/header') %> --->
+
+=======
     <%- include('partials/header') %>
     <% if (flashMessagesSuccess.length > 0) { %>
       <div id="flash-message-display" class="alert alert-success">
@@ -21,6 +24,7 @@
         <%= flashMessagesError %>
       </div>
     <% } %>
+>>>>>>> b393c92d818f285b92e39e46f5befc790ea44dc1
     <div class="container">
       <nav>
         <% if (session.user) { %>
@@ -40,15 +44,38 @@
       </nav>
 
     </div>
+
     <article>
-      Welcome to Bingo!
+      <h2>Welcome to Bingo!</h2>
     </article>
 
+<<<<<<< HEAD
+    <br>
+=======
     <section id="display-games">
     </section>
+>>>>>>> b393c92d818f285b92e39e46f5befc790ea44dc1
+
+    <h3>List of Games:</h3> 
+    <section id="GameBox">
+      <li>bing</li>
+      <li>bong</li>
+      <li>poo</li>
+    </section>
+    
+
+    
 
     <%- include('partials/chat') %>
-    <!-- <aside>
+    <%- include('partials/bingocard') %>
+    <% if (flashMessagesSuccess.length > 0) { %>
+      <div id="flash-message-display" class="alert alert-success">
+        <%= flashMessagesSuccess %>
+      </div>
+    <% } %>
+
+    <!--
+    <aside>
       <div>
         Hello chat (Now you can use this)
       </div>
@@ -57,7 +84,8 @@
         <input type="text" id="all-chat" name="all-chat" placeholder="Write your message here">
         <input type="submit" id="send-msg" name="all-chat-send" value="Submit">
       </form>
-    </aside> -->
+    </aside>
+    -->
 
     <!-- Keep script tag at bottom of the body -->
     <script src="/js/main.js"></script>

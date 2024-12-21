@@ -1,3 +1,66 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #c1b0ff;
+}
+
+div {
+  width: 40%;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 2px solid #9e83ff;
+  border-radius: 20px;
+  background-color: #e4e4ff;
+}
+
+a {
+  color: black;
+}
+
+nav {
+  list-style-type: none;
+  border: 10px;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7rem;
+}
+
+li {
+  border: 3px solid #c1b0ff;
+  background-color: #ede6ff;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+  color: black;
+}
+
+h1 {
+  text-align: center;
+}
+
+article {
+  justify-content: center;
+  display: flex;
+  border: 3px solid #c1b0ff;
+  background-color: #ede6ff;
+}
+
+h3 {
+  text-align: center;
+}
+
+#GameBox {
+  list-style-type: none;
+  border: 10px;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 7rem;
+}
+
 form {
   width: 40%;
   margin: 2rem auto;

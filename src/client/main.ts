@@ -10,6 +10,7 @@ declare global {
     roomID: number;
   }
 }
+
 // This makes the connection from the client to the server
 // and pins it to the global window object of the browser
 window.socket = io();

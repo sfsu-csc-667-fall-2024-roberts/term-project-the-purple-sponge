@@ -7,6 +7,8 @@ import {
   SELECT_GAME,
   SELECT_SESS,
   FETCH_ALL_GAMES,
+  SET_TIMER,
+  GET_TIMER,
 } from "./sql";
 
 // Types to help with everything
@@ -53,7 +55,7 @@ const createGame = async (
 
 // Fetch all games
 const fetchAllGames = async (): Promise<gameRoom[]> => {
-  return await db.many(FETCH_ALL_GAMES);
+  return await db.any(FETCH_ALL_GAMES);
 };
 
 // Create a game session
@@ -67,11 +69,10 @@ const createSess = async (gameroom_id: number): Promise<gameSess> => {
 */
 
 const findGame = async (
-  host_user_id: number,
   gameroom_id: number
 ): Promise<gameRoom> => {
   console.log("Getting information from Game " + gameroom_id);
-  return await db.one(SELECT_GAME, [host_user_id, gameroom_id]);
+  return await db.one(SELECT_GAME, [gameroom_id]);
 };
 
 const findSess = async (
@@ -89,11 +90,10 @@ const findSess = async (
 
 // Delete a new game
 const deleteGame = async (
-  host_user_id: number,
   gameroom_id: number
-): Promise<gameRoom> => {
+): Promise<number> => {
   console.log("Deleting Game " + gameroom_id);
-  return await db.one(DELETE_GAME, [host_user_id, gameroom_id]);
+  return await db.one(DELETE_GAME, [gameroom_id]);
 };
 
 // Delet a game session
@@ -107,6 +107,21 @@ const deleteSess = async (
   return await db.one(DELETE_SESS, [gameroom_id, gamesess_id]);
 };
 
+// Set timer start
+const setTimer = async (
+  gameroom_id: number,
+  timer_start: number
+): Promise<any> => {
+  return await db.any(SET_TIMER, [gameroom_id, timer_start]);
+}
+
+// Get timer start
+const getTimer = async (
+  gameroom_id: number
+): Promise<any> => {
+  return await db.any(GET_TIMER, [gameroom_id]);
+}
+
 export default {
   createGame,
   createSess,
@@ -115,5 +130,7 @@ export default {
   findSess,
   deleteGame,
   deleteSess,
+  setTimer,
+  getTimer
 };
 export type { gameRoom, gameSess };

@@ -37,6 +37,9 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       type: "integer",
       notNull: true,
     },
+    timer_start: {
+      type: "integer",
+    },
     created_at: {
       type: "timestamp",
       notNull: true,

@@ -5,7 +5,7 @@ import { Users } from "../db/dbmanifest";
 const router = express.Router();
 
 router.get("/login", (request, response) => {
-  console.log("/login route called");
+  console.log("PRTS // login route called");
   response.render("auth/login_page", {
     title: "Login Page",
     flashMessagesError: request.flash("error"),
@@ -14,7 +14,7 @@ router.get("/login", (request, response) => {
 });
 
 router.get("/register", (request, response) => {
-  console.log("register route called");
+  console.log("PRTS // register route called");
   response.render("auth/signup_page", {
     title: "Register Page",
     flashMessagesError: request.flash("error"),
@@ -26,7 +26,7 @@ router.post("/login", async (request, response) => {
   const { email, password } = request.body;
   try {
     const user = await Users.login(email, password);
-    console.log("user object in login: ", user);
+    console.log("PRTS // user object in login: ", user);
     // @ ts-expect-error TODO: Define the session type for the user object
     // TODO: Maybe make this not store the hashed password in the request object???
     request.session.user = user; // store the user object that is returned inside the request object for later use
@@ -45,7 +45,7 @@ router.post("/register", async (request, response) => {
   const { username, email, password } = request.body;
   try {
     const user = await Users.register(username, email, password);
-    console.log("Register user returned: ", user);
+    console.log("PRTS // Register user returned: ", user);
     // @ ts-expect-error TODO: Define the session type for the user object
     request.session.user = user; // "logs in the user after registering"
     request.flash("success", "Your account was successfully created!");

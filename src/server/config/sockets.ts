@@ -13,6 +13,9 @@ const bindSession = async (socket: Socket) => {
     // @ts-expect-error TODO figure out the typing for session on request
   } = request.session;
 
+  socket.join(`user-${userId}`);
+  socket.join(`game-${roomId}`);
+
   // TODO: Figure out what this does and how to use it
   // TODO there's a bug here; if the user has created a game, the game id is not yet parsed from the url parameters
   socket.join("global"); // automatically join a user to the global chat
