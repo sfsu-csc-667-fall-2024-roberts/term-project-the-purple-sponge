@@ -73,3 +73,31 @@ h3
 }
 
 
+#display-games {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+.gameroom-list-style {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+
+.horizontal-list {
+  display: flex; /* Use flexbox */
+  flex-direction: row; /* Arrange items in a row (default) */
+  list-style: none; /* Remove default bullet points */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  gap: 4px; /* Add space between items */
+  border-radius: 5px;
+  background-color: rgb(216, 216, 216);
+}
+
+.horizontal-list li {
+  padding: 5px 10px; /* Optional: Add padding inside each item */
+  background-color: #f0f0f0; /* Optional: Add background color for visibility */
+  border: 1px solid #ddd; /* Optional: Add border for styling */
+  border-radius: 4px; /* Optional: Round the corners */
+}

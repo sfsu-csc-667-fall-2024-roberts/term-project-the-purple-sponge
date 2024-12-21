@@ -17,3 +17,8 @@
 4. Type in `npm run db:migrate` this will connect to your database and start creating the tables for our game in there. You will also see an extra "test" table that was used for testing the database connection. (You can check this by going in pgadmin4 and going into the "Tables" section and looking at the tables you have)
 5. To remove a table you can type `npm run db:rollback` to remove one table (need to find a way to remove them all at once)
 6. Now type in `npm run start:dev` this should run the server and you should be able to the pages we have
+
+# Updating the Database After it has been changed
+
+1. In pgadmin4, delete every table manually including the migrations table
+   Then run: `npm run db:migrate` inside your terminal to build back all the tables
