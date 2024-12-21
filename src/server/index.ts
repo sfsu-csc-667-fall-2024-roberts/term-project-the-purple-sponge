@@ -54,6 +54,7 @@ app.use("/", routes.root);
 app.use("/games", middleware.authenticationMiddleware, routes.games);
 app.use("/auth", routes.auth);
 app.use("/test", routes.test);
+app.use("/chat", middleware.authenticationMiddleware, routes.chat);
 
 // express goes in sequential order of middleware that is used
 // this will be the last thing it tries to match if it is at the bottom

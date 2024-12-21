@@ -15,11 +15,9 @@ const bindSession = async (socket: Socket) => {
 
   // TODO: Figure out what this does and how to use it
   // TODO there's a bug here; if the user has created a game, the game id is not yet parsed from the url parameters
-  // socket.join(`game-${roomId}-user-${userId}`);
+  socket.join("global"); // automatically join a user to the global chat
   // socket.join(`chat-${roomId}`);
   // socket.join(`game-${roomId}`);
-
-  socket.join("test"); //added this line in rcently
 
   socket.use((_, next) => {
     console.log("Packet info: ", _);
@@ -47,10 +45,8 @@ export default function (
 
     io.on("connection", async (socket) => {
       await bindSession(socket);
-
       // @ts-expect-error TODO figure out the typing for session on request
       console.log(`client connected (${socket.request.session.id})`);
-
       socket.on("disconnect", () => {
         // @ts-expect-error TODO figure out the typing for session on request
         console.log(`client disconnected (${socket.request.session.id})`);

@@ -5,6 +5,7 @@ form {
   border: 2px solid #ccc;
   border-radius: 8px;
   background-color: #fff;
+  flex-direction: column;
 }
 
 /* Styling the  gameroom display */
@@ -43,4 +44,7 @@ form {
   font-weight: bold;
   line-height: 25px;
   text-decoration: none;
+}
+
+#messageContainer {
 }

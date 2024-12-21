@@ -9,8 +9,8 @@
 
 <html>
   <form id="chatBox">
-    <div id="messageContainer"></div>
-    <label for="chatBox">Message</label>
+    <h1>Chat</h1>
+    <!-- <label for="chatBox">Message</label> -->
     <input
       type="text"
       placeholder="Message goes here..."
@@ -20,9 +20,10 @@
       required
     />
     <button id="submitButton">Send</button>
+
+    <div id="messageContainer"></div>
   </form>
 
-  <!-- Below we are using the file that webpack generated form our ts folder in the client -->
+  <!-- Below we are using the javascript file that webpack generated form our ts folder in the client -->
   <script src="/js/clientchat.js"></script>
-  <!--<script src="/src/server/config/sockets.ts"></script> --->
 </html>
